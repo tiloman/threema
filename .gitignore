@@ -27,4 +27,4 @@
 /config/master.key
 
 #loval env
-local.env
+/config/local_env.rb

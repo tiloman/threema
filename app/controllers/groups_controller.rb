@@ -1,4 +1,8 @@
 class GroupsController < ApplicationController
+
+  include GroupsHelper
+
+
   def new
     @group = Group.new
   end
@@ -26,10 +30,12 @@ class GroupsController < ApplicationController
 
   def update
     set_group
-    if @group.update_group_attributes == 204
+    if req = update_group_attributes(@group, params[:group][:name], false).status == 204
       respond_to do |format|
         if @group.update(group_params)
-          format.html { redirect_to groups_url, notice: 'Die Gruppe wurde aktualisiert.' }
+          @group.reload
+          update_members(@group)
+          format.html { redirect_to @group, notice: "Die Gruppe wurde aktualisiert.#{req}" }
           format.json { render :show, status: :ok, location: @group }
         else
           format.html { render :edit }
@@ -38,7 +44,7 @@ class GroupsController < ApplicationController
       end
     else
       respond_to do |format|
-          format.html { redirect_to groups_url, notice: "Fehler: #{@group.update_group_attributes}" }
+          format.html { redirect_to groups_url, notice: "Fehler: #{update_group_attributes(@group, name = "rails-testgruppe", saveChatHistory = false) }" }
           format.json { head :no_content }
       end
     end
@@ -65,18 +71,16 @@ class GroupsController < ApplicationController
   def show
     set_group
     if params[:sync].present?
-      Member.sync_members_of_group(@group)
+      update_members(@group)
     end
 
-    if params[:image].present?
-      @group.get_image
-    end
-    @members = @group.get_members_from_server if @group.threema_id
+    @members = get_members_from_server(@group) if @group.threema_id
+
   end
 
     def destroy
       set_group
-      if @group.delete_from_threema == "204"
+      if req = delete_group_from_threema(@group) == "204"
         if @group.destroy
           respond_to do |format|
             format.html { redirect_to groups_url, notice: 'Gruppe wurde gelöscht.' }
@@ -90,7 +94,7 @@ class GroupsController < ApplicationController
         end
       else
         respond_to do |format|
-            format.html { redirect_to groups_url, notice: "Fehler: #{@group.delete_from_threema}" }
+            format.html { redirect_to groups_url, notice: "Fehler: #{req}" }
             format.json { head :no_content }
         end
       end

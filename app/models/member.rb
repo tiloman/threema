@@ -10,10 +10,10 @@ class Member < ApplicationRecord
   def self.sync_members_of_group(group)
 
     if group.threema_id
-      json_members = Faraday.get "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_API_KEY']}/groups/#{group.threema_id}/members?pageSize=0" do |req|
+      json_members = Faraday.get "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/groups/#{group.threema_id}/members?pageSize=0" do |req|
         req.params['limit'] = 100
         req.headers['Content-Type'] = 'application/json'
-        req.headers['X-API-Key'] = 'KH4RJ66FT39SLA7EED56A8Y4M92R82PM'
+        req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
         #req.body = {query: 'salmon'}.to_json
       end
       response = JSON.parse json_members.body

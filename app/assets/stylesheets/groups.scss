@@ -4,16 +4,37 @@
 }
 
 .group_item {
-  height: 50px;
+  height: 100px;
   width: 200px;
-  border: 1px solid grey;
+  //border: 1px solid grey;
   margin: 1em;
   border-radius: 5px;
+  position: relative;
+  padding: 5px;
   &:hover {
     background-color: $primary;
     color: white;
     a {
       color: white;
     }
+  }
+
+  img {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    right: 5px;
+  }
+
+  .group-name {
+    font-size: 1.2em;
+  }
+
+  .group-state {
+    font-size: 0.8em;
+    color: grey;
+    position: absolute;
+    bottom: 0;
+    right: 5px;
   }
 }

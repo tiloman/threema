@@ -15,12 +15,14 @@ Insgesamt <%= @groups.count %> Gruppen
 </div>
 
 <br><br>
-<h2> Nicht synchronisiert </h2><br>
-<div class="group_flex_container">
 
-  <%= render @not_synced_groups  %>
-</div>
-<hr>
+<% if @not_synced_groups.any? %>
+  <h2> Noch nicht synchronisiert </h2><br>
+  <div class="group_flex_container">
+    <%= render @not_synced_groups  %>
+  </div>
+  <hr>
+<% end %>
 <div class="group_flex_container">
 <%= render @groups %>
 </div>
