@@ -1,0 +1,7 @@
+#group_member_ids, #group_type_ids, #user_group_ids, #booking_user_id, #booking_type_ids, #check_out_okay, #time_table_types_id, #user_type_ids {
+  width: 100%;
+}
+
+.select2-container--bootstrap .select2-results__option--highlighted[aria-selected] {
+  background-color: $primary;
+}

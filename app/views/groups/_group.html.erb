@@ -1,0 +1,16 @@
+<%= link_to group do %>
+
+<div class="group_item">
+<% data = "data:image/jpeg;base64,#{group.image}" %>
+<%= image_tag data if group.image%>
+<%= group.name %>
+|
+<%= group.members.count %>
+<br>
+<%= group.state %>
+<% if group.threema_id.nil? %>
+<span class="badge badge-secondary">Nicht Synchronisiert</span>
+<% end %>
+
+</div>
+<% end %>

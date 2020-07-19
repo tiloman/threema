@@ -1,0 +1,13 @@
+<% if @team %>
+  <%= @team.name %>
+  Neue Gruppe:
+  <%= link_to "Neue Gruppe erstellen", new_group_path %><br>
+  <%= link_to "Gruppen anzeigen", groups_path %><br>
+
+<% else %>
+  Neues Team erstellen:
+  <%= link_to "Neues Team erstellen", new_team_path %>
+<% end %>
+
+
+<br>

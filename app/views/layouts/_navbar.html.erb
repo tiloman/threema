@@ -1,0 +1,80 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <%= link_to root_path, class: "navbar-brand" do %>
+    <%= image_tag "ajg_logo2.png", width: "30", height: "30", class:"d-inline-block align-top"  %>
+    <b>Threema.</b><span style='color: $primary; font-weight: 100;''>AJG</span><b>.</b>
+  <% end %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-users"></i> Gruppen
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to "Anzeigen", groups_path, class: "dropdown-item" %>
+            <%= link_to "Neue Gruppe", new_group_path, class: "dropdown-item" %>
+
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-users"></i> Mitglieder
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to "Anzeigen", members_path, class: "dropdown-item" %>
+          </div>
+        </li>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-bullhorn"></i>  Verteilerlisten
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+          </div>
+        </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-rss"></i>  Feeds
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+
+        </div>
+      </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-cog"></i>  Einstellungen
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="settings.php" onclick='loading()'>Profil</a>
+
+          </div>
+        </li>
+      </ul>
+
+    <div class="navbar-collapse justify-content-end" id="navbarCollapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="impressum.php" onclick='loading()'><i class="fas fa-info"></i> Info</a>
+        </li>
+        <li class="nav-item">
+          <% if current_user %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          <% else %>
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
