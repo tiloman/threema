@@ -1,0 +1,19 @@
+.group_flex_container {
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.group_item {
+  height: 50px;
+  width: 200px;
+  border: 1px solid grey;
+  margin: 1em;
+  border-radius: 5px;
+  &:hover {
+    background-color: $primary;
+    color: white;
+    a {
+      color: white;
+    }
+  }
+}

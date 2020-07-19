@@ -1,0 +1,16 @@
+<%= @members.count %> Mitglieder
+
+
+<div class="input-group">
+    <%= form_tag members_path, class: "form-inline", method: :get do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Suchen..", class: "form-control form-control-sm" %>
+      <div class="input-group-append">
+      <%= button_tag :submit, class: "btn btn-sm btn-primary" do %>
+        Suchen
+      <% end %>
+      </div>
+    <% end %>
+</div>
+
+
+<%= render @members %>
