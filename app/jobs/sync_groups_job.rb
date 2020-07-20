@@ -12,13 +12,9 @@ class SyncGroupsJob < ApplicationJob
 
     response['groups'].each do |group|
       new_group = Group.find_or_create_by(threema_id: group['id'])
-      if group['name'] != new_group.name
-        new_group.update_attribute(:name, group['name'])
-      elsif group['state'] != new_group.state
-        new_group.update_attribute(:state, group['state'])
-      elsif group['saveChatHistory'] != new_group.saveChatHistory
-        new_group.update_attribute(:saveChatHistory, group['saveChatHistory'])
-      end
+      new_group.update_attribute(:name, group['name']) if group['name'] != new_group.name
+      new_group.update_attribute(:state, group['state']) if group['state'] != new_group.state
+      new_group.update_attribute(:saveChatHistory, group['saveChatHistory']) if group['saveChatHistory'] != new_group.saveChatHistory
     end
 
   end
