@@ -14,6 +14,22 @@ module GroupsHelper
     request
   end
 
+
+  def create_group(name, members, saveChatHistory)
+    data = {:name => name,
+            :members => members,
+            :saveChatHistory => saveChatHistory
+            }
+    request = Faraday.put "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/groups" do |req|
+      req.params['limit'] = 100
+      req.headers['Content-Type'] = 'application/json'
+      req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
+      req.body = data.to_json
+    end
+
+    request
+  end
+
   def get_threema_ids(member_ids)
     Member.where(id: member_ids).map { |m| m['threema_id'] }
   end

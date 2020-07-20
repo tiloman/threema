@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+before_action :authenticate_user
 
   include GroupsHelper
 
@@ -9,7 +10,6 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Gruppe wurde erfolgreich erstellt' }
@@ -72,6 +72,10 @@ class GroupsController < ApplicationController
     set_group
     if params[:sync].present?
       update_members(@group)
+    end
+
+    if params[:create_group].present?
+      create_group(@group.name, @group.members.map { |m| m.threema_id }, false)
     end
 
     @members = get_members_from_server(@group) if @group.threema_id

@@ -21,6 +21,8 @@
   <% end %>
   <% else %>
   <h5>Gruppe wurde noch nicht veröffentlicht.</h5>
+  <%= link_to "create group", group_path(:id => @group.id, :sync => "create_group"), class:"btn btn-primary btn-sm" %><br>
+
 <% end %>
 
 
