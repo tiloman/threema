@@ -135,8 +135,8 @@ module GroupsHelper
     end
   end
 
-def get_heading_for_table(type, group)
-  if type == false
+def get_heading_for_table(action, group)
+  if action != "show"
     render html: '<br><br><h3>Mitglieder mit Hilfe der Tabelle hinzufügen</h3><br>'.html_safe
   else
     render html: "<br><br><h3>#{group.members.count} Mitglieder</h3>".html_safe

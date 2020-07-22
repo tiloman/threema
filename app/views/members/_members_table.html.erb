@@ -1,11 +1,11 @@
-<%= get_heading_for_table(current_page?(:action => 'show'), @group) %>
+<%= get_heading_for_table(action_name, @group) %>
 <%= text_field_tag :search, params[:search], placeholder: "Suchen..", class: "form-control" %>
 <br>
 
 <div class='tableBox' id="usersTable">
     <table>
       <thead>
-        <%= render html: "<th ><input type='checkbox' id='allUsersBox'/></th>".html_safe if current_page?(:action => 'show') == false%>
+        <%= render html: "<th ><input type='checkbox' id='allUsersBox'/></th>".html_safe if action_name != "show"%>
         <th onclick="sortUsersTable(1)" style="width: 30%"><i class="fas fa-sort"></i> Vorname</th>
         <th onclick="sortUsersTable(2)" style="width: 30%"><i class="fas fa-sort"></i> Nachname</th>
         <th onclick="sortUsersTable(3)" style="width: 30%"><i class="fas fa-sort"></i> Kategorie</th>
@@ -14,7 +14,7 @@
       <tbody style="height: 600px;" id="usersTable">
         <% @members.each do |member| %>
             <tr>
-              <% if current_page?(:action => 'show') == false%>
+              <% if action_name != "show" %>
               <td style='width: 50px'>
                 <span class="btn btn-primary btn-sm" id="<%= member.id %>" onclick="addMemberToSelect('<%= member.id %>', this)">
                   <i class="fas fa-user-plus"></i>
