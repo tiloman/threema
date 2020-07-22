@@ -17,9 +17,14 @@
 
 
       <div class="flexbox_head" style="text-align: center;">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+
         <div class="flexbox_login">
+          <% if notice %>
+            <p class="notice"><%= notice %></p>
+          <% end %>
+          <% if alert %>
+            <p class="alert"><%= alert %></p>
+          <% end %>
 
         <%= yield %>
 </div>

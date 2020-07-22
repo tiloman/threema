@@ -6,7 +6,7 @@ protected
 
 
   def configure_permitted_parameters
-     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit( :email, :password, :current_password, :threema_id)}
-     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit( :email, :password, :current_password, :threema_id)}
+     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit( :first_name, :last_name, :email, :password, :current_password, :threema_id)}
+     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit( :first_name, :last_name, :email, :password, :current_password, :threema_id)}
   end
 end

@@ -1,5 +1,8 @@
 <h3>Meine Gruppen </h3>
-<div class="group_flex_container">
-
-<%= render @groups %>
-</div>
+<% if @groups %>
+  <div class="group_flex_container">
+  <%= render @groups %>
+  </div>
+<% else %>
+  Keine Gruppen gefunden.
+<% end %>

@@ -12,7 +12,7 @@ module GroupsHelper
         req.body = data.to_json
       end
 
-      request
+      request.status
     end
   end
 

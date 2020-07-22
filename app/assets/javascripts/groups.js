@@ -15,7 +15,18 @@ $(document).on('turbolinks:load', function () {
 
     $('#group_member_ids').on("select2:unselect", function (e) { remove_add_btn_from_table(e.params.data.id) });
 
+    var selected = $('#group_member_ids').val();
+    for (var i in selected) {
+      btn = document.getElementById(selected[i]);
+      btn.innerHTML ='<i class="fas fa-user-minus"></i>'
+      btn.classList.add('btn-secondary')
+      btn.classList.remove('btn-primary')
+    }
+
 })
+
+
+
 
 
 function remove_add_btn_from_table(id) {
@@ -27,21 +38,33 @@ function remove_add_btn_from_table(id) {
 
 
 function addMemberToSelect(new_member, button) {
-  var selected = $('#group_member_ids').val();
-  if (selected != null ){
-    var members = selected.map(x => x);
+  var selected_now = $('#group_member_ids').val();
+  if (selected_now != null ){
+    var members = selected_now.map(x => x);
   } else {
     var members = [];
   }
 
+  if (button.classList.contains("btn-primary")) {
+    members.push(new_member);
+    $('#group_member_ids').val(members); // Select the option with a value of '1'
+    $('#group_member_ids').trigger('change'); // Notify any JS components that the value changed
+    //button.style.display = "none"
+    button.innerHTML ='<i class="fas fa-user-minus"></i>'
+    button.classList.add('btn-secondary')
+    button.classList.remove('btn-primary')
+  } else {
+    var index = members.indexOf(new_member);
+    members.splice(index, 1);
+    $('#group_member_ids').val(members); // Select the option with a value of '1'
+    $('#group_member_ids').trigger('change'); // Notify any JS components that the value changed
+    //button.style.display = "none"
+    button.innerHTML ='<i class="fas fa-user-plus"></i>'
+    button.classList.add('btn-primary')
+    button.classList.remove('btn-secondary')
+  }
 
-  members.push(new_member);
-  $('#group_member_ids').val(members); // Select the option with a value of '1'
-  $('#group_member_ids').trigger('change'); // Notify any JS components that the value changed
-  //button.style.display = "none"
-  button.innerHTML ='<i class="fas fa-user-minus"></i>'
-  button.classList.add('btn-secondary')
-  button.classList.remove('btn-primary')
+
 
 }
 

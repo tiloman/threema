@@ -35,7 +35,7 @@ include GroupsHelper
   def update
     set_group
     req = update_group_attributes(@group, params[:group][:name], params[:group][:saveChatHistory])
-    if req.status == 204 || @group.threema_id.nil?
+    if req == 204 || @group.threema_id.nil?
       respond_to do |format|
         if @group.update(group_params)
           @group.reload
@@ -49,7 +49,7 @@ include GroupsHelper
       end
     else
       respond_to do |format|
-          format.html { redirect_to @group, notice: "Fehler bei der Kommunikation mit Threema: #{req.body}\n Übermittelt: #{params[:group]}" }
+          format.html { redirect_to @group, notice: "Fehler bei der Kommunikation mit Threema: #{req}\n Übermittelt: #{params[:group]}" }
           format.json { head :no_content }
       end
     end
@@ -80,7 +80,7 @@ include GroupsHelper
 
   def my_groups
     member = Member.find_by(threema_id: current_user.threema_id)
-    @groups = member.groups
+    @groups = member.groups if member
   end
 
   def group_requests

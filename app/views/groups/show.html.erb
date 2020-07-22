@@ -5,30 +5,28 @@
 
 
 <h1><%= show_big_image(@group) %>
-<%= @group.name %>  <% if @group.threema_id.nil? %>| <span class="badge badge-secondary">Nur Lokal</span> <% end %>
+  <span data-toggle="tooltip" data-placement="right" title='Threema-ID: <%= @group.threema_id %>'>
+  <%= @group.name %>
+</span>
+
+ <% if @group.threema_id.nil? %>| <span class="badge badge-secondary">Nur Lokal</span> <% end %>
 </h1>
 
 
-<%= @group.state %> | <%= @group.threema_id %><br>
+<%= @group.state %> <br>
 <% if @threema_members %>
   <% if @threema_members.count != @group.members.count %>
-  <h5>!! Nicht in sync !!</h5>
-  <%= link_to "sync members", group_path(:id => @group.id, :sync => "sync_now"), class:"btn btn-primary btn-sm" %><br>
+  <h5>Nicht synchronisiert!</h5>
+    <%= link_to "sync members", group_path(:id => @group.id, :sync => "sync_now"), class:"btn btn-primary btn-sm" %><br>
   <% else %>
   <h5>Gruppe synchronisiert</h5>
   <% end %>
   <% else %>
-  <h5>Gruppe wurde noch nicht veröffentlicht.</h5>
-  <%= link_to 'Gruppe erstellen', group_create_group_in_threema_path(@group), method: :put, data: { confirm: 'Die Gruppe wird auf Threema hochgeladen. Fortfahren?' } %>
+  <h5>Gruppe wurde noch nicht veröffentlicht.</h5><br>
+  <%= link_to 'Gruppe mit Threema synchronisieren', group_create_group_in_threema_path(@group), method: :put, data: { confirm: 'Die Gruppe wird auf Threema hochgeladen. Fortfahren?' }, class: "btn btn-primary btn-block" %>
 <% end %>
 
 
-
-
-
-<br>
-
-<hr>
 
 
 <%= render "members/members_table" %>
