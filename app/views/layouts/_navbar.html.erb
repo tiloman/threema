@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "ajg_logo2.png", width: "30", height: "30", class:"d-inline-block align-top"  %>
-    <b>Threema.</b><span style='color: $primary; font-weight: 100;''>AJG</span><b>.</b>
+    <b>Threema.</b><span style="color: #5AADDD; font-weight: 100;">AJG</span><b>.</b>
   <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -18,6 +18,8 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to "Anzeigen", groups_path, class: "dropdown-item" %>
             <%= link_to "Neue Gruppe", new_group_path, class: "dropdown-item" %>
+            <%= link_to "Meine Gruppe", groups_my_groups_path, class: "dropdown-item" %>
+            <%= link_to "Anfragen", groups_group_requests_path, class: "dropdown-item" %>
 
           </div>
         </li>
@@ -56,7 +58,7 @@
           <i class="fas fa-cog"></i>  Einstellungen
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="settings.php" onclick='loading()'>Profil</a>
+            <%= link_to "Einstellungen", edit_user_registration_path, class: 'dropdown-item' %>
 
           </div>
         </li>

@@ -1,37 +1,27 @@
-<%= link_to "zurück", groups_path, class:"btn btn-outline-secondary btn-sm" %>
+<div class="action_buttons">
 <%= link_to "Bearbeiten", edit_group_path, class:"btn btn-outline-primary btn-sm" %>
 <%= link_to "Löschen", @group, method: :delete, data: {confirm: 'Gruppe wirklich löschen?'}, class:"btn btn-outline-danger btn-sm" %><br>
+</div>
 
-<br>
-<br>
 
-<h1><%= @group.name %>  <% if @group.threema_id.nil? %>| <span class="badge badge-secondary">Nur Lokal</span> <% end %>
+<h1><%= show_big_image(@group) %>
+<%= @group.name %>  <% if @group.threema_id.nil? %>| <span class="badge badge-secondary">Nur Lokal</span> <% end %>
 </h1>
 
 
 <%= @group.state %> | <%= @group.threema_id %><br>
-<br>
-<% if @members %>
-  <% if @members.count != @group.members.count %>
+<% if @threema_members %>
+  <% if @threema_members.count != @group.members.count %>
   <h5>!! Nicht in sync !!</h5>
   <%= link_to "sync members", group_path(:id => @group.id, :sync => "sync_now"), class:"btn btn-primary btn-sm" %><br>
-
   <% else %>
   <h5>Gruppe synchronisiert</h5>
   <% end %>
   <% else %>
   <h5>Gruppe wurde noch nicht veröffentlicht.</h5>
-  <%= link_to "create group", group_path(:id => @group.id, :sync => "create_group"), class:"btn btn-primary btn-sm" %><br>
-
+  <%= link_to 'Gruppe erstellen', group_create_group_in_threema_path(@group), method: :put, data: { confirm: 'Die Gruppe wird auf Threema hochgeladen. Fortfahren?' } %>
 <% end %>
 
-
-
-
-
-
-<% data = "data:image/jpeg;base64,#{@group.image}" %>
-<%= image_tag data if @group.image%>
 
 
 
@@ -39,16 +29,9 @@
 <br>
 
 <hr>
-<h3><%= @group.members.count %> Mitglieder</h3>
-<% @group.members.order('last_name ASC').each do |member| %>
-  <%= link_to member.name, member %>
-  <% if @members %>
-    <% if (@members.map { |m| m['id'] }).exclude?(member.threema_id) %>
-    <b>!!!NOT SYNC!!!</b>
-    <% end %>
-  <% end %>
-  <br>
-<% end %>
+
+
+<%= render "members/members_table" %>
 
 
 <hr>

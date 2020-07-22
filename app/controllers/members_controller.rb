@@ -7,13 +7,22 @@ class MembersController < ApplicationController
   end
 
   def index
-    if params[:search].present?
+    if params[:search]
       search = params[:search].downcase
-      @members = Member.where("first_name != ?", "")
+      category = params[:category]
+      @members = Member
               .where("LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ? OR LOWER(first_name || ' ' || last_name) LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
+
     else
       @members = Member.all
     end
+
+    if params[:category].present?
+      @members = @members.where("category LIKE ?", params[:category])
+    end
+
+    @categories = Member.all.map{| m | [m.category, m.category] if m.category != nil }.uniq.reject(&:nil?)
+
   end
 
 private

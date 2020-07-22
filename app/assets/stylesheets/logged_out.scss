@@ -1,0 +1,109 @@
+html {
+  min-height: 100%;
+
+}
+
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  font-weight: 150;
+  text-align: left;
+}
+
+
+.flexbox_login, {
+  background-color: #343a40;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px #000;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 1em;
+  max-width: 400px;
+  padding: 1em;
+  color: white;
+  font-weight: 200;
+  a {
+    color: white;
+  }
+
+  .custom-button {
+    color: white;
+    background-color: $primary;
+    width: 70%;
+    height: 2em;
+    margin: 0.8em;
+    text-align: center;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    letter-spacing: 0.1em;
+  }
+
+  input {
+    width: 70%;
+    height: 2em;
+    margin: 0.3em;
+    text-align: center;
+    font-size: 1em;
+    /* border-radius: 5px; */
+    border: black, 1px, solid;
+
+  }
+  #user_remember_me {
+    width: inherit;
+    height: inherit;
+  }
+
+}
+
+.flexbox_head {
+  background-image: url('https://teacher.threema.ajg.eu/img/hgStartseite.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-color: grey;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding-top: 20%;
+  padding-bottom: 20%;
+  text-align: center;
+
+  h2 {
+    font-size: 2em;
+    font-weight: 100;
+    letter-spacing: -0.05em;
+    padding: inherit;
+    margin-bottom: 0.5em;
+    margin-top: 0em;
+    border: inherit;
+    text-align: center;
+
+  }
+
+}
+// .login_text {
+//   padding-left: 3em;
+//   padding-right: 3em;
+//   padding-left: 15%;
+//   text-align: center;
+//
+// }
+//
+
+//
+// .head_text {
+//   font-size: 3em;
+//   font-weight: 600;
+//   padding: 0;
+//   margin: 0;
+//   padding-left: 5%;
+//   padding-right: 5%;
+//   padding-bottom: 1em;
+// }
+//
+// .login_flex_container {
+//   width: 100%;
+//   border-radius: 0;
+// }

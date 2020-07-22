@@ -13,11 +13,18 @@
   </head>
 
   <body>
-    <%= render "layouts/navbar" %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <div class="container">
-    <%= yield %>
+    <%= render "layouts/navbar_signed_out" %>
+
+
+      <div class="flexbox_head" style="text-align: center;">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <div class="flexbox_login">
+
+        <%= yield %>
+</div>
+
+
     </div>
   </body>
 

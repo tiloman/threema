@@ -3,9 +3,8 @@ class Team < ApplicationRecord
 
 private
 
-  
   def downcase_subdomain
-  self.subdomain.downcase!
-end
+    self.subdomain.downcase!
+  end
 
 end

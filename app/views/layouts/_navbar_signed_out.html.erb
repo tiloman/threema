@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <%= link_to root_path, class: "navbar-brand" do %>
+    <%= image_tag "ajg_logo2.png", width: "30", height: "30", class:"d-inline-block align-top"  %>
+    <b>Threema.</b><span style="color: #5AADDD; font-weight: 100;">AJG</span><b>.</b>
+  <% end %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
+        </li> -->
+
+      </ul>
+
+    <div class="navbar-collapse justify-content-end" id="navbarCollapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to home_impressum_path, class: "nav-link" do %>
+          <i class="fas fa-info"></i> Info
+          <% end %>
+        </li>
+        <li class="nav-item">
+
+          <%= link_to new_user_registration_path, class: "nav-link" do %>
+          <i class="fas fa-user-plus"></i> Registrieren
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to new_user_session_path, class: "nav-link" do %>
+            <i class="fas fa-sign-in-alt"></i> Login
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

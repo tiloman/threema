@@ -1,11 +1,12 @@
 .group_flex_container {
   display: flex;
   flex-wrap:wrap;
+  justify-content: center;
 }
 
 .group_item {
-  height: 100px;
-  width: 200px;
+  height: 60px;
+  width: 330px;
   //border: 1px solid grey;
   margin: 1em;
   border-radius: 5px;
@@ -19,15 +20,28 @@
     }
   }
 
-  img {
-    height: 50px;
-    width: 50px;
+
+  .group-image {
+    height: 30px;
+    width: 30px;
     position: absolute;
-    right: 5px;
+    left: 5px;
+    font-size: 1.3em;
+    color: $primary;
   }
 
   .group-name {
+    position: absolute;
+    left: 40px;
     font-size: 1.2em;
+  }
+
+  .group-members {
+    font-size: 0.8em;
+    position: absolute;
+    color: grey;
+    bottom: 0;
+    left: 5px;
   }
 
   .group-state {
@@ -37,4 +51,38 @@
     bottom: 0;
     right: 5px;
   }
+}
+
+.tableBox {
+    width: 100%;
+    overflow: auto;
+    max-height: 400px;
+    margin-bottom: 2em;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+.group-image-big {
+    height: 100px;
+    width: 100px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-size: 1.8em;
+    color: $primary;
+
+  }
+
+.tableBox::-webkit-scrollbar{
+	-webkit-appearance: none;
+	width: 14px;
+	height: 14px;
+}
+
+.tableBox::-webkit-scrollbar-thumb{
+	border-radius: 8px;
+	border: 3px solid #fff;
+	background-color: rgba(0, 0, 0, .3);
 }

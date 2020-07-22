@@ -1,33 +1,40 @@
 module GroupsHelper
 
   def update_group_attributes(group, name, saveChatHistory)
-    data = {:name => name,
-            :saveChatHistory => saveChatHistory
-            }
-    request = Faraday.put "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/groups/#{group.threema_id}" do |req|
-      req.params['limit'] = 100
-      req.headers['Content-Type'] = 'application/json'
-      req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
-      req.body = data.to_json
-    end
+    if group.threema_id
+      data = {:name => name,
+              :saveChatHistory => ActiveRecord::Type::Boolean.new.cast(saveChatHistory)
+              }
+      request = Faraday.put "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/groups/#{group.threema_id}" do |req|
+        req.params['limit'] = 100
+        req.headers['Content-Type'] = 'application/json'
+        req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
+        req.body = data.to_json
+      end
 
-    request
+      request
+    end
   end
 
 
-  def create_group(name, members, saveChatHistory)
+  def create_group(group, name, members, saveChatHistory)
+
     data = {:name => name,
             :members => members,
-            :saveChatHistory => saveChatHistory
+            :saveChatHistory => ActiveRecord::Type::Boolean.new.cast(saveChatHistory)
             }
-    request = Faraday.put "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/groups" do |req|
+    response_json = Faraday.post "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/groups" do |req|
       req.params['limit'] = 100
       req.headers['Content-Type'] = 'application/json'
       req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
       req.body = data.to_json
     end
 
-    request
+
+    response = JSON.parse response_json.body
+    group.update_attribute(:threema_id, response['id'])
+
+    response
   end
 
   def get_threema_ids(member_ids)
@@ -109,5 +116,33 @@ module GroupsHelper
     end
     request.status
   end
+
+  def show_image(group)
+    if group.image
+      data = "data:image/jpeg;base64,#{group.image}"
+      image_tag data, class:"group-image"
+    else
+      render html: '<div class="group-image"><i class="fas fa-users"></i></div>'.html_safe
+    end
+  end
+
+  def show_big_image(group)
+    if group.image
+      data = "data:image/jpeg;base64,#{group.image}"
+      image_tag data, class:"group-image-big"
+    else
+      render html: '<div class="group-image-big"><i class="fas fa-users"></i></div>'.html_safe
+    end
+  end
+
+def get_heading_for_table(type, group)
+  if type == false
+    render html: '<br><br><h3>Mitglieder mit Hilfe der Tabelle hinzufügen</h3><br>'.html_safe
+  else
+    render html: "<br><br><h3>#{group.members.count} Mitglieder</h3>".html_safe
+  end
+end
+
+
 
 end

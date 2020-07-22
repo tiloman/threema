@@ -2,12 +2,14 @@ $primary:  #5AADDD;
 
 
 @import "select2";
-
 @import "select2-bootstrap";
 @import "bootstrap";
 
 @import "members";
 @import "groups";
+@import "pagination";
+@import "logged_out";
+
 
 
 body {
@@ -45,4 +47,12 @@ a:hover {
 
 .content {
   margin: 1em;
+}
+
+.form-inline .input-group, .form-inline .custom-select {
+  width: 100%;
+}
+
+.action_buttons {
+  float: right;
 }

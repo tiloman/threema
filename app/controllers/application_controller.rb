@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
-before_action :set_team
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
 protected
 
-  def set_team
-    @team = Team.find_by(subdomain: request.subdomain)
+
+  def configure_permitted_parameters
+     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit( :email, :password, :current_password, :threema_id)}
+     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit( :email, :password, :current_password, :threema_id)}
   end
-
-
 end
