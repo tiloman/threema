@@ -10,16 +10,17 @@ class MembersController < ApplicationController
     if params[:search]
       search = params[:search].downcase
       category = params[:category]
-      @members = Member
+      members = Member
               .where("LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ? OR LOWER(first_name || ' ' || last_name) LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
 
     else
-      @members = Member.all
+      members = Member.all
     end
 
     if params[:category].present?
-      @members = @members.where("category LIKE ?", params[:category])
+      members = members.where("category LIKE ?", params[:category])
     end
+    @members = members.paginate(page: params[:page],  :per_page => params[:per_page])
 
     @categories = Member.all.map{| m | [m.category, m.category] if m.category != nil }.uniq.reject(&:nil?)
 

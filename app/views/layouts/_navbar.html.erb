@@ -59,6 +59,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to "Einstellungen", edit_user_registration_path, class: 'dropdown-item' %>
+            <%= link_to "Benutzerverwaltung", users_path, class: 'dropdown-item' %>
 
           </div>
         </li>
@@ -67,8 +68,9 @@
     <div class="navbar-collapse justify-content-end" id="navbarCollapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="impressum.php" onclick='loading()'><i class="fas fa-info"></i> Info</a>
-        </li>
+          <%= link_to home_impressum_path, class: "nav-link" do %>
+          <i class="fas fa-info"></i> Info
+          <% end %>        </li>
         <li class="nav-item">
           <% if current_user %>
           <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>

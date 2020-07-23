@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   get 'home/impressum'
 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations', passwords: 'users/passwords' }
+  resources :users do
+    collection do
+      put :update_user_role
+    end
+  end#, only: [:index, :show]
 
   get 'home/index'
   root to: "home#index"

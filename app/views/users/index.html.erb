@@ -1,0 +1,23 @@
+<h1>Benutzerverwaltung</h1>
+
+
+<h3>Dein Kollegium:</h3>
+<p><b>User</b> können: Gruppen erstellen und verwalten.<br>
+<b>Verwaltung</b> kann zusätzlich Feeds senden.<br>
+<b>Administratoren</b> können zusätzlich: Verteilerlisten erstellen, verwalten und Nachrichten senden. Darüber hinaus können Adminstratoren die Rechte anderer Benutzer verändern.</p>
+<br>
+
+
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Threema ID</th>
+      <th scope="col">Rolle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @users %>
+
+  </tbody>
+</table>
