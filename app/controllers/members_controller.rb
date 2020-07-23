@@ -7,6 +7,10 @@ class MembersController < ApplicationController
   end
 
   def index
+    unless params[:per_page].present?
+      params[:per_page] = 25 #default
+    end
+
     if params[:search]
       search = params[:search].downcase
       category = params[:category]

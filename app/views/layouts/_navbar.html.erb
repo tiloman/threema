@@ -24,14 +24,13 @@
           </div>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item">
+          <%= link_to members_path, class: "nav-link" do %>
             <i class="fas fa-users"></i> Mitglieder
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <%= link_to "Anzeigen", members_path, class: "dropdown-item" %>
-          </div>
+          <% end %>
         </li>
+
+
 
 
         <li class="nav-item dropdown">

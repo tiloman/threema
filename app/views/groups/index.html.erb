@@ -21,7 +21,7 @@
 </div>
 
 <div class="digg_pagination">
-  <%= will_paginate @groups, renderer: BootstrapPagination::Rails %>
+  <%= will_paginate @groups %>
 </div>
 <%= form_tag groups_path, method: :get do %>
   <div style="width: 60px; float: left;margin-right: 8px;">

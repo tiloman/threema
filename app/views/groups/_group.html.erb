@@ -2,7 +2,7 @@
 
   <div class="group_item shadow">
   <%= show_image(group) %>
-    <span class="group-name"><%= group.name %></span>
+    <span class="group-name"><%= group.name.truncate(30) %></span>
 
     <br>
     <span class="group-members"><%= group.members.count %> Mitglieder</span>

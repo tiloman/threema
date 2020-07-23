@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
+
+  authenticated :user do
+    root to: "home#index"
+  end
+
+  devise_scope :user do
+    root to: "users/sessions#new"
+  end
+
   get 'groups/new'
   get 'groups/manage'
   get 'home/impressum'
+  get 'home/index'
 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations', passwords: 'users/passwords' }
   resources :users do
@@ -10,8 +20,6 @@ Rails.application.routes.draw do
     end
   end#, only: [:index, :show]
 
-  get 'home/index'
-  root to: "home#index"
 
   resources :teams
   get '/groups/my_groups', to: 'groups#my_groups'

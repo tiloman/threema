@@ -15,19 +15,23 @@
       </div>
     <% end %>
 </div>
+
 <br><br>
 
 
 <div class="digg_pagination">
-  <%= will_paginate @members, renderer: BootstrapPagination::Rails %>
+  <%= will_paginate @members %>
 </div>
+
 <%= form_tag members_path, method: :get do %>
   <div style="width: 60px; float: left;margin-right: 8px;">
+
       <%= select_tag :per_page, options_for_select([10, 25, 50, 100], params[:per_page]),class: "custom-select custom-select-sm", :onchange => "this.form.submit();" %>
   </div>
   <small>Ergebnisse pro Seite</small>
-<% end %>
 
+<% end %>
+<br>
 <table class="table table-hover ">
   <thead>
     <tr>
@@ -41,3 +45,7 @@
 
   </tbody>
 </table>
+
+<div style="float: right">
+<%= page_entries_info  @members, :model => 'member' %>
+</div>

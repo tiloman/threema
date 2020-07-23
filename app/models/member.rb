@@ -18,13 +18,8 @@ class Member < ApplicationRecord
       response = JSON.parse json_members.body
 
       response['members'].each do |m|
-        puts "****** #{m.inspect}"
 
-        member = Member.find_or_initialize_by(threema_id: m['id'])
-        member.update_attribute(:first_name, m['firstName']) #if m['firstName'] #!= member.first_name
-        member.update_attribute(:last_name, m['lastName']) #if m['lastName'] #!= member.last_name
-        member.update_attribute(:category, m['category'])# if m['category'] #!= member.category
-
+        member = Member.find_by(threema_id: m['id'])
           if member.groups.exclude?(group)
             member.groups << group
             member.save
@@ -33,14 +28,12 @@ class Member < ApplicationRecord
 
         if group.members.count != response['members'].count
           group.members.each do |member|
-
             if response['members'].map { |m| m['id'] }.exclude?(member.threema_id)
-              puts "#{member.name} sollte gelöscht werden."
               group.members.delete(member)
             end
           end
-
         end
+        
       end
     end
 
@@ -53,8 +46,6 @@ class Member < ApplicationRecord
       response = JSON.parse json_members.body
 
       response['users'].each do |m|
-        puts "****** #{m.inspect}"
-
         member = Member.find_or_initialize_by(threema_id: m['id'])
         member.update_attribute(:first_name, m['firstName']) #if m['firstName'] #!= member.first_name
         member.update_attribute(:last_name, m['lastName']) #if m['lastName'] #!= member.last_name
