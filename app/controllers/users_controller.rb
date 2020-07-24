@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  #before_action :is_admin?
+  before_action :is_admin?
+  before_action :user_confirmed_by_admin?
 
   def index
     @users = User.all

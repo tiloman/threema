@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
 before_action :authenticate_user!
+before_action :user_confirmed_by_admin?
 
 include GroupsHelper
 
@@ -132,5 +133,6 @@ include GroupsHelper
     def group_params
       params.require(:group).permit(:name, :saveChatHistory, :member_ids => [])
     end
+
 
 end

@@ -4,11 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-
   before_create :validate_threema_account_data
   before_update :validate_threema_account_data
 
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :threema_id,  presence: true
 
 
   private

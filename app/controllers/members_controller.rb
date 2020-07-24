@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
   before_action :authenticate_user!
+  before_action :user_confirmed_by_admin?
 
 
   def show
