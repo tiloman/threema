@@ -7,8 +7,8 @@ $(document).on('turbolinks:load', function () {
     });
 
     $('#category').on('change', function(){
-      if (this[1].selected) {
-        $(this).selectpicker('deselectAll');
+      if (this[0].selected) {
+        $('#category').clear
       }
     });
 })

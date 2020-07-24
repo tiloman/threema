@@ -1,8 +1,10 @@
 <h3>Gruppenanfragen </h3>
+<br>
+<% if @groups.any? %>
 <div class="group_flex_container">
-<% if @groups %>
   <%= render @groups %>
+</div>
+
 <% else %>
   Derzeit gibt es keine Anfragen zur Gründung einer Gruppe.
 <% end %>
-</div>

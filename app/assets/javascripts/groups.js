@@ -26,9 +26,6 @@ $(document).on('turbolinks:load', function () {
 })
 
 
-
-
-
 function remove_add_btn_from_table(id) {
   button = document.getElementById(id)
   button.innerHTML ='<i class="fas fa-user-plus"></i>'
@@ -107,6 +104,10 @@ let num = checkboxes.length;
 }
 
 
+function add_me(user) {
+  let button = document.getElementById(user);
+  addMemberToSelect(user, button)
+}
 
 //Auswahl löschen
 function unSelectAll(){

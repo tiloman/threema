@@ -27,9 +27,18 @@
 <% end %>
 
 
-
-
-<%= render "members/members_table" %>
-
+<br><br>
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Kategorie</th>
+      <th scope="col">Threema ID</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= render @members %>
+</tbody>
+</table>
 
 <hr>

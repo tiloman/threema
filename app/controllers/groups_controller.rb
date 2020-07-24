@@ -6,7 +6,6 @@ include GroupsHelper
   def new
     @group = Group.new
     @members = Member.all
-
   end
 
   def create
@@ -69,9 +68,9 @@ include GroupsHelper
     end
 
     if params[:all_groups].present?
-      groups = groups.where(state: ['active', 'deleted'])
+      groups = groups.include_deleted
     else
-      groups = groups.where(state: "active")
+      groups = groups
     end
 
     @groups = groups.paginate(page: params[:page],  :per_page => params[:per_page])
@@ -84,8 +83,7 @@ include GroupsHelper
   end
 
   def group_requests
-    @groups = Group.all.where(threema_id: [nil, ""])
-                         .paginate(page: params[:page])
+    @groups = Group.local_groups.paginate(page: params[:page])
   end
 
   def show

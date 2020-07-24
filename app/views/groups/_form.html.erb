@@ -2,8 +2,6 @@
 <%= form_for @group do |form| %>
   <% if @group.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
-
       <ul>
       <% @group.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,6 +9,7 @@
       </ul>
     </div>
   <% end %>
+
 
 
 
@@ -28,6 +27,9 @@
   <%= form.check_box :saveChatHistory, class:"custom-control-input", id: "customSwitch1" %>
   <label class="custom-control-label" for="customSwitch1">Save Chat History</label>
 </div>
+
+<%= javascript_tag "add_me(#{current_user_member.id})" if action_name =="new"%>
+
 
 <br><br>
     <%= form.submit 'Speichern', class: "btn btn-primary" %>

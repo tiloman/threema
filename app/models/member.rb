@@ -2,6 +2,10 @@ class Member < ApplicationRecord
   has_many :group_members, dependent: :destroy
   has_many :groups, through: :group_members
 
+  default_scope {order(last_name: :asc)}
+
+  validates_uniqueness_of :threema_id, :allow_blank => true, :allow_nil => true
+
 
   def name
     self.first_name + " " + self.last_name if self.first_name && self.last_name
@@ -33,7 +37,7 @@ class Member < ApplicationRecord
             end
           end
         end
-        
+
       end
     end
 
@@ -50,9 +54,11 @@ class Member < ApplicationRecord
         member.update_attribute(:first_name, m['firstName']) #if m['firstName'] #!= member.first_name
         member.update_attribute(:last_name, m['lastName']) #if m['lastName'] #!= member.last_name
         member.update_attribute(:category, m['category'])# if m['category'] #!= member.category
-
-        end
+        member.update_attribute(:nickname, m['nickname'])# if m['category'] #!= member.category
+      end
 
     end
+
+
 
   end
