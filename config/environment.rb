@@ -10,9 +10,9 @@ ActionMailer::Base.smtp_settings = {
   :password => ENV['SENDGRID_API_KEY'],
   :domain => 'timolohmann.de',
   :address => 'smtp.sendgrid.net',
-  :port => 25,
+  :port => 587,
   :authentication => :plain,
-  :enable_starttls_auto => false
+  :enable_starttls_auto => true
 }
 
 
