@@ -2,12 +2,21 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style>
-      /* Email styles need to be inline */
-    </style>
+    <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+      <%= stylesheet_link_tag "application-mailer", media: "all" %>
   </head>
 
   <body>
-    <%= yield %>
+
+
+    <div class="container shadow">
+      <div class="logo">
+        <%= image_tag "ajg_logo2.png", width: "30", height: "30", class:"d-inline-block align-top"  %>
+        <b>Threema.</b><span style="color: #5AADDD; font-weight: 100;">AJG</span><b>.</b>
+      </div>
+      <%= yield %>
+    </div>
+
   </body>
 </html>

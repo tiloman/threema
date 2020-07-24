@@ -1,0 +1,48 @@
+//import 'bootstrap-email';
+
+
+@media (prefers-color-scheme:  dark) {
+  html, body {
+    p {color: 333;}
+  }
+};
+
+
+$primary: #5AADDD;;
+
+h1 {
+  border-left: 10px $primary solid;
+  font-size: 1.5em;
+  font-weight: 200;
+  padding-left: 0.7em;
+  margin-bottom: 1em;
+}
+
+
+.shadow {
+    box-shadow: 1px 5px 15px #ccc;
+}
+
+.container {
+  padding: 1em;
+  max-width: 800px;
+  width: 95%;
+  margin: auto;
+}
+
+a {
+  color: $primary;
+}
+
+
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+
+
+.logo {
+  float: right;
+}

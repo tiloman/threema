@@ -1,3 +1,5 @@
+Devise::Mailer.layout "mailer"
+
 # frozen_string_literal: true
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
@@ -19,7 +21,6 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'AJG Threema <no-reply@timolohmann.de>'
-
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
