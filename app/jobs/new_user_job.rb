@@ -1,7 +1,7 @@
 class NewUserJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(user)
     UserMailer.welcome_email(user).deliver_later
 
     User.admins.each do |admin|
