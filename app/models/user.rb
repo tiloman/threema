@@ -45,7 +45,7 @@ class User < ApplicationRecord
   end
 
   def role_changed?
-     
+
   end
 
 end

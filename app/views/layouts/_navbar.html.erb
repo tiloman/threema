@@ -10,6 +10,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
+        <% if current_user %>
 
         <% unless current_user.is_unconfirmed %>
 
@@ -67,6 +68,7 @@
 
           </div>
         </li>
+        <% end %>
       </ul>
 
     <div class="navbar-collapse justify-content-end" id="navbarCollapse">

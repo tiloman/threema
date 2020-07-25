@@ -4,28 +4,28 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-Mail Adresse" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-Mail Adresse", required: true %>
   </div>
 
   <div class="field">
-    <%= f.text_field :threema_id, autofocus: true, placeholder: "Threema ID" %>
+    <%= f.text_field :threema_id, autofocus: true, placeholder: "Threema ID", required: true %>
   </div>
 
   <div class="field">
-    <%= f.text_field :first_name, autofocus: true, placeholder: "Vorname" %>
+    <%= f.text_field :first_name, autofocus: true, placeholder: "Vorname", required: true %>
   </div>
 
   <div class="field">
-    <%= f.text_field :last_name, autofocus: true, placeholder: "Nachname" %>
+    <%= f.text_field :last_name, autofocus: true, placeholder: "Nachname", required: true %>
   </div>
 
 <br>
   <div class="field">
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Passwort" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Passwort", required: true %>
   </div>
 
   <div class="field">
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Passwort wiederholen" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Passwort wiederholen", required: true %>
   </div>
 <br>
   <div class="actions">
