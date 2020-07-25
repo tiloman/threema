@@ -7,8 +7,25 @@ class User < ApplicationRecord
   before_create :validate_threema_account_data
   before_update :validate_threema_account_data
 
+  after_create :new_user_job
+  after_update :role_changed?
+
   validates :first_name, :last_name, :threema_id,  presence: true
 
+  scope :admins, -> { where(role: "Administrator") }
+
+
+  def is_admin
+    self.role == "Administrator"
+  end
+
+  def name
+    self.first_name + " " + self.last_name if self.first_name && self.last_name
+  end
+
+  def is_unconfirmed
+    self.role == "unconfirmed"
+  end
 
   private
 
@@ -21,6 +38,14 @@ class User < ApplicationRecord
         throw :abort
       end
     end
+  end
+
+  def new_user_job
+    NewUserJob.perform_later(self)
+  end
+
+  def role_changed?
+     
   end
 
 end

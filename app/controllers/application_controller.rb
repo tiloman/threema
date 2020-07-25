@@ -12,13 +12,13 @@ protected
 
   def is_admin?
     if current_user
-      redirect_to root_path, notice: "Keine Berechtigung." unless current_user.role == "Administrator"
+      redirect_to root_path, notice: "Keine Berechtigung." unless current_user.is_admin
     end
   end
 
   def user_confirmed_by_admin?
     if current_user
-      redirect_to root_path, notice: "Dein Account wurde noch nicht bestätigt." if current_user.role == "Unconfirmed"
+      redirect_to root_path, notice: "Dein Account wurde noch nicht bestätigt. Ein Administrator wurde benachrichtigt und wird deinen Account aktivieren." if current_user.is_unconfirmed
     end
   end
 end
