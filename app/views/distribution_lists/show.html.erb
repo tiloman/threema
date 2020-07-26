@@ -1,0 +1,19 @@
+<h1><%= @list.name %></h1>
+<br>
+
+<%= @members.count %> Empfänger<br>
+<br>
+<%= link_to "Nachricht senden", distribution_list_send_message_path(@list.id), class:"btn btn-primary btn-block" %>
+<br><br>
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Kategorie</th>
+      <th scope="col">Threema ID</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= render @members %>
+</tbody>
+</table>

@@ -1,0 +1,18 @@
+<h2>Verteilerlisten</h2>
+
+<%= form_tag distribution_lists_path, class: "form-inline", method: :get do %>
+
+<div class="input-group mb-3">
+  <%= text_field_tag :search, params[:search], placeholder: "Listen durchsuchen..", class: "form-control" %>
+  <div class="input-group-append">
+  <%= button_tag :submit, class: "btn btn-outline-secondary" do %>
+    <i class="fas fa-search"></i>
+  <% end %>
+  </div>
+</div>
+<% end %>
+
+<br><br>
+<div class="list_flex_container">
+<%= render @lists %>
+</div>

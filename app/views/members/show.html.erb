@@ -1,8 +1,20 @@
 <h1><%= @member.name %></h1>
 <i><%= @member.nickname %></i><br><br>
+<hr>
+<h3>Gruppen</h3>
+
 Mitglied in <%= @member.groups.count %> Gruppen.
-<br><br>
+<br>
 <div class="group_flex_container">
 
 <%= render @member.groups %>
+</div>
+
+<hr>
+<h3>Verteilerlisten</h3>
+Empfänger von <%= @member.distribution_lists.count %> Verteilerlisten.
+<br><br>
+<div class="list_flex_container">
+
+<%= render @member.distribution_lists %>
 </div>

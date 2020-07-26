@@ -1,0 +1,10 @@
+<h1><%= @list.name %> </h1>
+<h3>Nachricht senden</h3>
+<br><br>
+
+<%= form_with(url: "/distribution_lists/20/send_list_new_message", method: "put") do %>
+
+  <%= text_area_tag "message", current_user.name,  class: "form-control",rows: "4" %><br>
+  <%= submit_tag "Nachricht senden", class: "btn btn-primary" %>
+
+<% end %>

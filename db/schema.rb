@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_111549) do
+ActiveRecord::Schema.define(version: 2020_07_26_153738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 2020_07_24_111549) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "distribution_lists", force: :cascade do |t|
+    t.string "name"
+    t.string "threema_id"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "group_members", force: :cascade do |t|
     t.bigint "member_id"
     t.bigint "group_id"
@@ -47,6 +55,13 @@ ActiveRecord::Schema.define(version: 2020_07_24_111549) do
     t.string "state"
     t.boolean "saveChatHistory"
     t.string "image"
+  end
+
+  create_table "list_members", force: :cascade do |t|
+    t.bigint "member_id"
+    t.bigint "distribution_list_id"
+    t.index ["distribution_list_id"], name: "index_list_members_on_distribution_list_id"
+    t.index ["member_id"], name: "index_list_members_on_member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -92,5 +107,7 @@ ActiveRecord::Schema.define(version: 2020_07_24_111549) do
 
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "members"
+  add_foreign_key "list_members", "distribution_lists"
+  add_foreign_key "list_members", "members"
   add_foreign_key "teams", "users"
 end

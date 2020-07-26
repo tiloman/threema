@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'distribution_lists/index'
+  get 'distribution_lists/edit'
   authenticated :user do
     root to: "home#index"
   end
@@ -22,6 +24,11 @@ Rails.application.routes.draw do
 
 
   resources :teams
+  resources :distribution_lists do
+    get :send_message
+    put :send_list_new_message
+  end
+
   get '/groups/my_groups', to: 'groups#my_groups'
   get '/groups/group_requests', to: 'groups#group_requests'
 

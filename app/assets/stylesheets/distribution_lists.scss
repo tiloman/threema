@@ -1,0 +1,44 @@
+// Place all the styles related to the DistributionLists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.list_flex_container {
+  display: flex;
+  flex-direction: column;
+
+  .list_item {
+    margin-bottom: 1em;
+    padding: 1em;
+    height: 50px;
+    border-radius: 1em;
+    position: relative;
+    &:hover {
+      background-color: $primary;
+      color: white;
+      a {
+        color: white;
+      }
+      .list-image {
+        color: white;
+      }
+    }
+
+    .list-image {
+      font-size: 2em;
+      color: $primary;
+      position: absolute;
+      left: 5px;
+      top: 5px;
+    }
+    .list-name {
+      font-size:1.2em;
+      position: absolute;
+      left: 3em;
+    }
+    .list-members {
+      position: absolute;
+      font-size: 0.8em;
+      right: 1em;
+    }
+
+  }
+}

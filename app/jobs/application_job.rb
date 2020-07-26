@@ -11,8 +11,12 @@ class ApplicationJob < ActiveJob::Base
     #get all members from threema and update their groups
     SyncMembersJob.perform_later
 
-    #get group images 
+    #get group images
     SyncGroupImagesJob.perform_later
+
+    SyncListsJob.perform_later
+
+    SyncListMembersJob.perform_later
 
   end
 end

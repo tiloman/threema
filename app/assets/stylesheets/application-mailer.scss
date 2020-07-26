@@ -4,6 +4,12 @@
 @media (prefers-color-scheme:  dark) {
   html, body {
     p {color: 333;}
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      background-color: #f7f7f7;
+      font-weight: 300;
+    }
   }
 };
 
@@ -24,9 +30,10 @@ h1 {
 }
 
 .container {
-  padding: 1em;
+  padding: 2em;
   max-width: 800px;
   width: 95%;
+  background-color: white;
   margin: auto;
 }
 
