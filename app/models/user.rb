@@ -8,7 +8,7 @@ class User < ApplicationRecord
   before_update :validate_threema_account_data
 
   after_create :new_user_job
-  after_update :role_changed?
+  after_save :role_changed_mail#, if role_changed?
 
   validates :first_name, :last_name, :threema_id,  presence: true
 
@@ -44,8 +44,8 @@ class User < ApplicationRecord
     NewUserJob.perform_later(self)
   end
 
-  def role_changed?
-
+  def role_changed_mail
+    UserMailer.role_changed(self, self.saved_change_to_role).deliver_later
   end
 
 end

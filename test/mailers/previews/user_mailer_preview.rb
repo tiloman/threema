@@ -5,4 +5,8 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.welcome_email(User.first)
   end
 
+  def role_changed
+    UserMailer.role_changed(User.first, ["Verwaltung", "Benutzer"])
+  end
+
 end

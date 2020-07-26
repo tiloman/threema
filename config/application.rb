@@ -11,8 +11,9 @@ module Threemarails
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
     config.active_job.queue_adapter = :delayed_job
-    
+
     config.action_mailer.preview_path = "#{Rails.root}/test/mailers/previews"
+    config.action_mailer.asset_host = "http://5992929637995.hostingkunde.de"
 
 
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
