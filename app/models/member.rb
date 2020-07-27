@@ -5,6 +5,9 @@ class Member < ApplicationRecord
   has_many :list_members, dependent: :destroy
   has_many :distribution_lists, through: :list_members
 
+  has_many :feed_members, dependent: :destroy
+  has_many :feeds, through: :feed_members
+
   default_scope {order(last_name: :asc)}
 
   validates_uniqueness_of :threema_id, :allow_blank => true, :allow_nil => true

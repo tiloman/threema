@@ -1,0 +1,11 @@
+<%= link_to feed do %>
+<div class="feed_item shadow">
+<div class="feed-image"><i class="fas fa-rss"></i></div>
+<div class="feed-name">
+<%= feed.name %>
+</div>
+<div class="feed-members">
+  <%= feed.members.count %> Empfänger
+</div>
+</div>
+<% end %>

@@ -1,0 +1,28 @@
+<h2><%= @feed.name %></h2>
+<%= @feed.members.count %> Empfänger
+
+<%= link_to "Nachricht senden", feed_new_message_path(@feed.id), class:"btn btn-primary btn-block" %>
+<br><br>
+
+<div class="feed-message-container">
+<% @messages.each do | message | %>
+<div class="feed-message shadow">
+<div class="feed-date"><%= (message['createdAt']).to_time.strftime("%d.%m.%Y um %H:%M Uhr")  %></div>
+<%= message['body']['de'] %>
+</div>
+<% end %>
+</div>
+
+<br><br>
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Kategorie</th>
+      <th scope="col">Threema ID</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= render @members %>
+</tbody>
+</table>

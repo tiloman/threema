@@ -47,7 +47,6 @@ module DistributionListsHelper
     data = {:recipients => members}
 
     puts data
-puts "+++++REMOVE++++++++++++++++++++++++++++"
     request = Faraday.delete "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/distribution_lists/#{list.threema_id}/recipients" do |req|
       req.params['limit'] = 100
       req.headers['Content-Type'] = 'application/json'
@@ -115,11 +114,6 @@ def missing_remote_recipients(list)
 end
 
 def get_recipients_from_server(list)
-  puts "*****************"
-  puts "*****************"
-  puts "*****************"
-  puts "*****************"
-
   json_members = Faraday.get "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/distribution_lists/#{list.threema_id}/recipients?pageSize=0" do |req|
     req.params['limit'] = 100
     req.headers['Content-Type'] = 'application/json'

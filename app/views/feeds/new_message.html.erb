@@ -1,0 +1,9 @@
+<h1><%= @feed.name %> </h1>
+<h3>Nachricht senden</h3>
+<br><br>
+
+<%= form_with(url: "/feeds/#{@feed.id}/send_feed_new_message", method: "put") do %>
+  <% prefilled_text = "*#{current_user.name} verteilt an #{@feed.name}:*" %>
+  <%= text_area_tag "message", prefilled_text,  class: "form-control",rows: "4" %><br>
+  <%= submit_tag "Nachricht senden", class: "btn btn-primary" %>
+<% end %>

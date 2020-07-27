@@ -18,5 +18,9 @@ class ApplicationJob < ActiveJob::Base
 
     SyncListMembersJob.perform_later
 
+    SyncFeedsJob.perform_later
+    
+    SyncFeedsMembersJob.perform_later
+
   end
 end

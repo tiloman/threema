@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_26_153738) do
+ActiveRecord::Schema.define(version: 2020_07_27_131417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 2020_07_26_153738) do
     t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "feed_members", force: :cascade do |t|
+    t.bigint "member_id"
+    t.bigint "feed_id"
+    t.index ["feed_id"], name: "index_feed_members_on_feed_id"
+    t.index ["member_id"], name: "index_feed_members_on_member_id"
+  end
+
+  create_table "feeds", force: :cascade do |t|
+    t.string "name"
+    t.string "threema_id"
   end
 
   create_table "group_members", force: :cascade do |t|
@@ -105,6 +117,8 @@ ActiveRecord::Schema.define(version: 2020_07_26_153738) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "feed_members", "feeds"
+  add_foreign_key "feed_members", "members"
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "members"
   add_foreign_key "list_members", "distribution_lists"

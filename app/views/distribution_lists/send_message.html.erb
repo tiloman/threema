@@ -2,7 +2,7 @@
 <h3>Nachricht senden</h3>
 <br><br>
 
-<%= form_with(url: "/distribution_lists/20/send_list_new_message", method: "put") do %>
+<%= form_with(url: "/distribution_lists/#{@list.id}/send_list_new_message", method: "put") do %>
   <% prefilled_text = "*#{current_user.name} verteilt an #{@list.name}:*" %>
   <%= text_area_tag "message", prefilled_text,  class: "form-control",rows: "4" %><br>
   <%= submit_tag "Nachricht senden", class: "btn btn-primary" %>

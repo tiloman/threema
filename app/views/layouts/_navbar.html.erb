@@ -48,16 +48,15 @@
           </li>
         <% end %>
 
-        <% unless current_user.is_unconfirmed %>
+        <% if current_user.is_admin %>
+          <li class="nav-item">
+            <%= link_to feeds_path, class: "nav-link" do %>
+            <i class="fas fa-rss"></i>  Feeds
+            <% end %>
+          </li>
+        <% end %>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-rss"></i>  Feeds
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        </div>
-      </li>
-      <% end %>
+
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

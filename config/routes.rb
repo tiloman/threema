@@ -29,6 +29,11 @@ Rails.application.routes.draw do
     put :send_list_new_message
   end
 
+  resources :feeds do
+    get :new_message
+    put :send_feed_new_message
+  end
+
   get '/groups/my_groups', to: 'groups#my_groups'
   get '/groups/group_requests', to: 'groups#group_requests'
 
