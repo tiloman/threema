@@ -6,6 +6,27 @@ class DistributionListsController < ApplicationController
   include DistributionListsHelper
 
 
+  def new
+    @list = DistributionList.new
+    @members = Member.all
+  end
+
+  def create
+    @members = Member.all
+
+    @list = DistributionList.new(list_params)
+    respond_to do |format|
+      if @list.save
+        req = create_list(@list, @list.name) unless @list.threema_id
+        format.html { redirect_to @list, notice: "Verteilerliste wurde erfolgreich erstellt" }
+        format.json { render :show, status: :created, location: @list }
+      else
+        format.html { render :new }
+        format.json { render json: @list.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def index
     if params[:search].present?
       search = params[:search].downcase
@@ -18,7 +39,34 @@ class DistributionListsController < ApplicationController
   end
 
   def edit
+    set_list
+    @members = Member.all
+    @categories = Member.all.map{| m | [m.category, m.category] if m.category != nil }.uniq.reject(&:nil?)
   end
+
+  def update
+    set_list
+    req = update_list_attributes(@list, params[:distribution_list][:name])
+    if req[1] == 204 || req[1] == 200 || @list.threema_id.nil?
+      respond_to do |format|
+        if @list.update(list_params)
+          @list.reload
+          update_recipients(@list) if @list.threema_id
+          format.html { redirect_to @list, notice: "Die Liste wurde aktualisiert." }
+          format.json { render :show, status: :ok, location: @list }
+        else
+          format.html { render :edit }
+          format.json { render json: @list.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+          format.html { redirect_to @list, notice: "Fehler bei der Kommunikation mit Threema: #{req}\n Übermittelt: #{params[:distribution_list]}" }
+          format.json { head :no_content }
+      end
+    end
+  end
+
 
   def show
     set_list
@@ -36,14 +84,22 @@ class DistributionListsController < ApplicationController
 
     response = send_list_message(list, message )
     respond_to do |format|
-      format.html { redirect_to list, notice: response }
+      format.html { redirect_to list, notice: "Die Nachricht wurde versendet. Es kann einige Minuten dauern bis Nachricht angezeigt wird." }
       format.json { head :no_content }
     end
   end
+
+
 
   private
 
   def set_list
     @list = DistributionList.find(params[:id])
   end
+
+  def list_params
+    params.require(:distribution_list).permit(:name, :member_ids => [])
+  end
+
+
 end

@@ -35,7 +35,14 @@ function remove_add_btn_from_table(id) {
 
 
 function addMemberToSelect(new_member, button) {
-  var selected_now = $('#group_member_ids').val();
+  if ($('#group_member_ids').length) {
+    var select2_form = $('#group_member_ids');
+  }
+  else if ($('#distribution_list_member_ids').length) {
+    var select2_form = $('#distribution_list_member_ids');
+  }
+
+  var selected_now = select2_form.val();
   if (selected_now != null ){
     var members = selected_now.map(x => x);
   } else {
@@ -44,18 +51,16 @@ function addMemberToSelect(new_member, button) {
 
   if (button.classList.contains("btn-primary")) {
     members.push(new_member);
-    $('#group_member_ids').val(members); // Select the option with a value of '1'
-    $('#group_member_ids').trigger('change'); // Notify any JS components that the value changed
-    //button.style.display = "none"
+    select2_form.val(members); // Select the option with a value of '1'
+    select2_form.trigger('change'); // Notify any JS components that the value changed
     button.innerHTML ='<i class="fas fa-user-minus"></i>'
     button.classList.add('btn-secondary')
     button.classList.remove('btn-primary')
   } else {
     var index = members.indexOf(new_member);
     members.splice(index, 1);
-    $('#group_member_ids').val(members); // Select the option with a value of '1'
-    $('#group_member_ids').trigger('change'); // Notify any JS components that the value changed
-    //button.style.display = "none"
+    select2_form.val(members); // Select the option with a value of '1'
+    select2_form.trigger('change'); // Notify any JS components that the value changed
     button.innerHTML ='<i class="fas fa-user-plus"></i>'
     button.classList.add('btn-primary')
     button.classList.remove('btn-secondary')

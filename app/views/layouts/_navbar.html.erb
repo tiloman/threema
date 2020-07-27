@@ -36,11 +36,15 @@
         <% end %>
 
 
-        <% unless current_user.is_unconfirmed %>
-          <li class="nav-item">
-            <%= link_to distribution_lists_path, class: "nav-link" do %>
-            <i class="fas fa-bullhorn"></i>  Verteilerlisten
-            <% end %>
+        <% if current_user.is_admin %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-bullhorn"></i>  Verteilerlisten
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <%= link_to "Listen anzeigen", distribution_lists_path, class: "dropdown-item" if current_user.is_admin %>
+              <%= link_to "Neue Liste", new_distribution_list_path, class: "dropdown-item" %>
+            </div>
           </li>
         <% end %>
 

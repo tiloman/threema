@@ -3,8 +3,8 @@
 <br><br>
 
 <%= form_with(url: "/distribution_lists/20/send_list_new_message", method: "put") do %>
-
-  <%= text_area_tag "message", current_user.name,  class: "form-control",rows: "4" %><br>
+  <% prefilled_text = "*#{current_user.name} verteilt an #{@list.name}:*" %>
+  <%= text_area_tag "message", prefilled_text,  class: "form-control",rows: "4" %><br>
   <%= submit_tag "Nachricht senden", class: "btn btn-primary" %>
 
 <% end %>

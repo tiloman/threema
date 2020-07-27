@@ -31,7 +31,6 @@ include GroupsHelper
     set_group
     @members = Member.all
     @categories = Member.all.map{| m | [m.category, m.category] if m.category != nil }.uniq.reject(&:nil?)
-
   end
 
   def update
@@ -103,27 +102,27 @@ include GroupsHelper
   end
 
 
-    def destroy
-      set_group
-      if req = delete_group_from_threema(@group) == "204" || @group.threema_id.nil?
-        if @group.destroy
-          respond_to do |format|
-            format.html { redirect_to groups_url, notice: 'Gruppe wurde gelöscht.' }
-            format.json { head :no_content }
-          end
-        else
-          respond_to do |format|
-            format.html { render :show }
-            format.json { render json: @group.errors, status: :unprocessable_entity }
-          end
+  def destroy
+    set_group
+    if req = delete_group_from_threema(@group) == "204" || @group.threema_id.nil?
+      if @group.destroy
+        respond_to do |format|
+          format.html { redirect_to groups_url, notice: 'Gruppe wurde gelöscht.' }
+          format.json { head :no_content }
         end
       else
         respond_to do |format|
-            format.html { redirect_to groups_url, notice: "Fehler: #{req}" }
-            format.json { head :no_content }
+          format.html { render :show }
+          format.json { render json: @group.errors, status: :unprocessable_entity }
         end
       end
+    else
+      respond_to do |format|
+          format.html { redirect_to groups_url, notice: "Fehler: #{req}" }
+          format.json { head :no_content }
+      end
     end
+  end
 
 
   private

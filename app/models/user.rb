@@ -45,7 +45,7 @@ class User < ApplicationRecord
   end
 
   def role_changed_mail
-    UserMailer.role_changed(self, self.saved_change_to_role).deliver_later
+    UserMailer.role_changed(self, self.saved_change_to_role).deliver_later if self.saved_change_to_role
   end
 
 end

@@ -1,0 +1,31 @@
+<%= form_for @list do |form| %>
+  <% if @list.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @list.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+  <div class="actions">
+    <br>
+    Name der Liste: <br>
+    <%= form.text_field :name, placeholder: "Listenname", class:"form-control form-control-lg" %><br>
+    <%= render 'members/members_table', :locals => {:members => @members} %>
+
+    <h3>Empfänger </h3><br>
+    <%= form.collection_select :member_ids, @members.order(:first_name), :id, :name, {}, {multiple: true} %>
+<br>
+
+<%= javascript_tag "add_me(#{current_user_member.id})" if action_name =="new"%>
+
+
+<br><br>
+    <%= form.submit 'Speichern', class: "btn btn-primary" %>
+  </div>
+<% end %>
