@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :is_admin?
   before_action :user_confirmed_by_admin?
+  before_action :is_owner
+
 
   def index
     @users = User.all
@@ -8,7 +9,8 @@ class UsersController < ApplicationController
 
   def update_user_role
     user = User.find(params[:id])
-    if user.update_attributes!(role: params[:role])
+    user.assign_attributes(role: params[:role])
+    if user.save(validate: false)
       respond_to do |format|
         format.html { redirect_to  users_path, notice: "#{user.first_name} wurde aktualisiert." }
         format.json { head :no_content }
@@ -20,5 +22,14 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def destroy
+   @user = User.find(params[:id])
+   @user.destroy
+
+   if @user.destroy
+       redirect_to users_url, notice: "Benutzer gelöscht."
+   end
+ end
 
 end

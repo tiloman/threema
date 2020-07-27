@@ -17,6 +17,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
+gem 'devise_invitable', '~> 2.0.0'
 #gem 'apartment'
 gem 'faraday'
 gem 'delayed_job_active_record'

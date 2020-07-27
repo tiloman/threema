@@ -15,9 +15,10 @@ module Threemarails
     config.action_mailer.preview_path = "#{Rails.root}/test/mailers/previews"
     config.action_mailer.asset_host = "http://5992929637995.hostingkunde.de"
 
-
-    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'models', '*', '*.yml').to_s]
     config.i18n.default_locale = :de
+
+    #config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

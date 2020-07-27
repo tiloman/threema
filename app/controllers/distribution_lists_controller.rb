@@ -1,7 +1,7 @@
 class DistributionListsController < ApplicationController
   before_action :authenticate_user!
   before_action :user_confirmed_by_admin?
-  before_action :is_admin?
+  before_action :is_admin_or_higher
 
   include DistributionListsHelper
 

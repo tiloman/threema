@@ -4,8 +4,8 @@ class NewUserJob < ApplicationJob
   def perform(user)
     UserMailer.welcome_email(user).deliver_later
 
-    User.admins.each do |admin|
-      AdminMailer.new_user(user, admin).deliver_later
+    User.owners.each do |owner|
+      AdminMailer.new_user(user, owner).deliver_later
     end
 
   end

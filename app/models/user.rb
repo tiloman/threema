@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
   before_create :validate_threema_account_data
@@ -13,10 +13,29 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :threema_id,  presence: true
 
   scope :admins, -> { where(role: "Administrator") }
+  scope :owners, -> { where(role: "Besitzer") }
 
 
-  def is_admin
-    self.role == "Administrator"
+  def is_user_or_higher
+    if self.role == "Benutzer" || self.role == "Verwaltung" || self.role == "Administrator" || self.role == "Besitzer"
+      return true
+    end
+  end
+
+  def is_management_or_higher
+    if self.role == "Verwaltung" || self.role == "Administrator" || self.role == "Besitzer"
+      return true
+    end
+  end
+
+  def is_admin_or_higher
+    if self.role == "Administrator" || self.role == "Besitzer"
+      return true
+    end
+  end
+
+  def is_owner
+    return true if self.role == "Besitzer"
   end
 
   def name
@@ -25,6 +44,10 @@ class User < ApplicationRecord
 
   def is_unconfirmed
     self.role == "unconfirmed"
+  end
+
+  def member
+    Member.find_by(threema_id: self.threema_id)
   end
 
   private

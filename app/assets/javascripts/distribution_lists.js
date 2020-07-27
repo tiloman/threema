@@ -23,6 +23,14 @@ $(document).on('turbolinks:load', function () {
       btn.classList.remove('btn-primary')
     }
 
+    $( "#list_container" ).hide();
+
+    $( "#toggle_lists" ).click(function() {
+      $( "#list_container" ).toggle( "slow", function() {
+        // Animation complete.
+      });
+    });
+
 })
 
 // function remove_add_btn_from_table(id) {

@@ -23,6 +23,12 @@ $(document).on('turbolinks:load', function () {
       btn.classList.remove('btn-primary')
     }
 
+    $( "#group_container" ).hide()
+    $( "#toggle_groups" ).click(function() {
+      $( "#group_container" ).toggle( "slow", function() {
+        // Animation complete.
+      });
+    });
 })
 
 

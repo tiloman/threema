@@ -99,6 +99,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.2)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     erubi (1.9.0)
     execjs (2.7.0)
     faraday (0.17.0)
@@ -261,6 +264,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   delayed_job_active_record
   devise
+  devise_invitable (~> 2.0.0)
   faraday
   jbuilder (~> 2.5)
   jquery-rails

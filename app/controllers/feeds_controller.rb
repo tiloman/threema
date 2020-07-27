@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
   before_action :authenticate_user!
   before_action :user_confirmed_by_admin?
-  before_action :is_admin?
+  before_action :is_management_or_higher
 
 
   include FeedsHelper

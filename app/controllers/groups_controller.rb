@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
 before_action :authenticate_user!
 before_action :user_confirmed_by_admin?
-before_action :is_admin?, only: [:group_requests, :create_group_in_threema, :index]
+before_action :is_management_or_higher, only: [:group_requests, :create_group_in_threema, :index]
 
 
 include GroupsHelper

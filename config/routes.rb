@@ -15,12 +15,13 @@ Rails.application.routes.draw do
   get 'home/impressum'
   get 'home/index'
 
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations', passwords: 'users/passwords' }
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations', passwords: 'users/passwords', invitations: 'users/invitations' }
   resources :users do
     collection do
       put :update_user_role
     end
   end#, only: [:index, :show]
+  match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
 
 
   resources :teams

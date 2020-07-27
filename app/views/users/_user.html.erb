@@ -1,10 +1,28 @@
 <tr>
-  <td>  <%= user.first_name %>
-    <%= user.last_name %>
+  <td>
+    <% if user.first_name.present? %>
+    <%= user.first_name %>
+    <%= user.last_name %><br>
+    <%= user.email %>
+
+    <% else %>
+    - Eingeladen -<br>
+    <%= user.email %>
+    <% end %>
+    <br>
   </td>
-  <td>  <%= user.threema_id %></td>
+  <td>
+    <% if user.threema_id.present? %>
+    <%= user.threema_id %>
+    <% else %>
+    -
+    <% end %>
+  </td>
   <td><%= form_for user, :url => {action: "update_user_role", params: {id: user.id}}, method: "put" do %>
-    <%= select_tag :role, options_for_select(['Unbestätigt', 'Benutzer', 'Verwaltung', 'Administrator'], user.role), class: "custom-select custom-select-sm", :onchange => "this.form.submit();" %>
+    <%= select_tag :role, options_for_select(['Unbestätigt', 'Benutzer', 'Verwaltung', 'Administrator', 'Besitzer'], user.role), class: "custom-select custom-select-sm", :onchange => "this.form.submit();" %>
   <% end %>
+</td>
+<td>
+<%= button_to "Löschen", admin_destroy_user_path(user), data: { confirm: "#{user.name} wirklich löschen?" }, class:"btn btn-danger", method: :delete %>
 </td>
 </tr>

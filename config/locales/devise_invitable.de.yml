@@ -1,0 +1,21 @@
+de:
+  devise:
+    invitations:
+      send_instructions: 'Eine Einladung wurde an %{email} gesendet.'
+      invitation_token_invalid: 'Der Einladungs Schlüssel ist nicht gültig!'
+      updated: 'Die Registrierung war erfolgreich.'
+      no_invitations_remaining: "Sie können keine weiteren Einladungen mehr vornehmen."
+      new:
+        header: "Benutzer einladen"
+        submit_button: "Einladung senden"
+      edit:
+        header: "Einladung vervollständigen"
+        submit_button: "Speichern"
+    mailer:
+      invitation_instructions:
+        subject: 'Einladung'
+        hello: "Hallo %{email},"
+        someone_invited_you: "Due wurdest eingeladen Threema AJG zu nutzen. Du kannst die Einladung durch klicken des folgenden Links aktzeptieren:"
+        accept: "Aktzeptieren"
+        accept_until: "Die Einladung ist gültig bis: ..."
+        ignore: "Falls du die Einladung nicht annehmen möchtest, ignoriere einfach diese Mail."

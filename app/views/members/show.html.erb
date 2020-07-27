@@ -1,20 +1,33 @@
 <h1><%= @member.name %></h1>
 <i><%= @member.nickname %></i><br><br>
 <hr>
-<h3>Gruppen</h3>
-
+<h3>Gruppen <span id="toggle_groups" style="float: right" class="btn btn-primary">
+  <i class="far fa-eye"></i>
+  </span></h3></h3>
 Mitglied in <%= @member.groups.count %> Gruppen.
-<br>
-<div class="group_flex_container">
-
+<br><br>
+<div class="group_flex_container" id="group_container">
 <%= render @member.groups %>
 </div>
 
 <hr>
-<h3>Verteilerlisten</h3>
+<h3>Verteilerlisten <span id="toggle_lists" style="float: right" class="btn btn-primary">
+  <i class="far fa-eye"></i>
+  </span></h3>
 Empfänger von <%= @member.distribution_lists.count %> Verteilerlisten.
 <br><br>
-<div class="list_flex_container">
-
+<div class="list_flex_container" id="list_container">
 <%= render @member.distribution_lists %>
+</div>
+
+<hr>
+<h3>Feeds <span id="toggle_feeds" style="float: right" class="btn btn-primary">
+  <i class="far fa-eye"></i>
+  </span></h3>
+Empfänger von <%= @member.feeds.count %> Feeds.
+
+<br><br>
+
+<div class="feed_flex_container" id="feed_container">
+<%= render @member.feeds %>
 </div>
