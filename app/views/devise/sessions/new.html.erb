@@ -1,3 +1,5 @@
+<p class="notice"><b>Threema AJG</b> ist umgezogen wodurch eine erneute Registrierung erforderlich wird.</p>
+
 <h2>Login.</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -15,11 +17,10 @@
       Eingeloggt bleiben
     </div>
   <% end %>
-  <br>
 
   <div class="actions">
     <%= f.submit "Einloggen", class: "custom-button" %>
   </div>
 <% end %>
-
+<hr>
 <%= render "devise/shared/links" %>

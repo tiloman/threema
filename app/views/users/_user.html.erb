@@ -26,7 +26,9 @@
     <% end %>
   <% end %>
 </td>
-<td>
-<%= button_to "Löschen", admin_destroy_user_path(user), data: { confirm: "#{user.name} wirklich löschen?" }, class:"btn btn-danger", method: :delete %>
+<td style="text-align: right">
+<%= button_to admin_destroy_user_path(user), data: { confirm: "#{user.name} wirklich löschen?" }, class:"btn btn-danger", method: :delete do %>
+<i class="fas fa-trash-alt"></i>
+<% end %>
 </td>
 </tr>

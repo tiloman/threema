@@ -68,3 +68,30 @@ a:hover {
 .notice {
   color: $primary;
 }
+
+.box_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .box {
+    width: 90%;
+    height: 200px;
+    max-width: 300px;
+    min-width: 200px;
+    border-radius: 1em;
+    margin: 1em;
+    padding: 1em;
+    font-size: 0.9em;
+  }
+
+  .box:hover {
+    background-color: $primary;
+    color: white;
+  }
+  .box_header {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+  }
+
+}

@@ -1,10 +1,12 @@
-<h1><%= @list.name %> </h1>
+<h1><%= @list.name %>  | <%= @list.members.count %> Empfänger</h1>
 <h3>Nachricht senden</h3>
 <br><br>
 
 <%= form_with(url: "/distribution_lists/#{@list.id}/send_list_new_message", method: "put") do %>
-  <% prefilled_text = "*#{current_user.name} verteilt an #{@list.name}:*" %>
-  <%= text_area_tag "message", prefilled_text,  class: "form-control",rows: "4" %><br>
-  <%= submit_tag "Nachricht senden", class: "btn btn-primary" %>
+  <% prefilled_text = "*#{current_user.name} verteilt an #{@list.name}:*\nBitte Text eingeben ..." %>
+  <%= text_area_tag "message", prefilled_text,  class: "form-control",rows: "4" ,minlength: 10, maxlength: 3000 %>
+  <p class="small">Um Texte <b>fett</b>, <i>kursiv</i> oder durchgestrichen zu formatieren, flankiere sie einfach mit folgenden Zeichen: *fett*, _kursiv_, ~durchgestrichen~.</p>
+<br>
+  <%= submit_tag "Nachricht senden", data: { confirm: "Nachricht senden?" }, class: "btn btn-primary btn-block" %>
 
 <% end %>

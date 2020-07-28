@@ -6,7 +6,7 @@
 
     <br>
     <span class="group-members"><%= group.members.count %> Mitglieder</span>
-    <span class="group-state"><%= group.state %></span>
+    <span class="group-state"><% if group.saveChatHistory %><i class="fas fa-cloud"></i><% end %> <%= group.state %></span>
     <% if group.threema_id.nil? %>
     <span class="group-state badge badge-primary">Nicht Synchronisiert</span>
     <% end %>

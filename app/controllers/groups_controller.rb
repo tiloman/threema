@@ -144,7 +144,7 @@ include GroupsHelper
 
     def is_member_of_group
       member = Member.find_by(threema_id: current_user.threema_id)
-      redirect_to groups_path, notice: "Keine Berechtigung." unless @group.members.exists?(member.id)
+      redirect_to groups_path, notice: "Keine Berechtigung." unless @group.members.exists?(member.id) || current_user.is_management_or_higher
     end
 
 end

@@ -23,14 +23,15 @@
         </li>
         <li class="nav-item">
 
-          <%= link_to new_user_registration_path, class: "nav-link" do %>
-          <i class="fas fa-user-plus"></i> Registrieren
-          <% end %>
+            <%= link_to new_user_registration_path, class: "nav-link" do %>
+            <i class="fas fa-user-plus"></i> Registrieren
+            <% end %>
+          
         </li>
         <li class="nav-item">
-          <%= link_to new_user_session_path, class: "nav-link" do %>
-            <i class="fas fa-sign-in-alt"></i> Login
-          <% end %>
+
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+
         </li>
       </ul>
     </div>

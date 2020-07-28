@@ -47,7 +47,7 @@ Name
   </div>
 
 <br>
-Status: <%= resource.role %><br><br>
+Benutzerrolle: <%= resource.role %><br><br>
 
   <div class="actions">
     <%= f.submit "Daten aktualisieren", class:"btn btn-primary" %>
@@ -57,5 +57,5 @@ Status: <%= resource.role %><br><br>
 <hr>
 
 <h3>Account löschen?</h3>
-
+<br>
 <%= button_to "Account löschen", registration_path(resource_name), data: { confirm: "Sicher?" }, class:"btn btn-danger", method: :delete %>

@@ -13,8 +13,11 @@
   </head>
 
   <body>
-    <%= render "layouts/navbar_signed_out" %>
-
+    <% if current_user %>
+      <%= render "layouts/navbar" %>
+    <% else %>
+      <%= render "layouts/navbar_signed_out" %>
+    <% end %>
 
       <div class="flexbox_head" style="text-align: center;">
 
@@ -25,7 +28,6 @@
           <% if alert %>
             <p class="alert"><%= alert %></p>
           <% end %>
-
         <%= yield %>
 </div>
 

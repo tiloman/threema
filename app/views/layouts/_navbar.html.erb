@@ -16,7 +16,7 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-users"></i> Gruppen
+            <i class="fas fa-users"></i> Gruppen <% if pending_group_requests > 0 %><span class="badge badge-secondary"><%= pending_group_requests %></span><% end %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to "Alle Gruppen", groups_path, class: "dropdown-item"  %>
@@ -79,19 +79,13 @@
         </li>
 
         <li class="nav-item">
-          <% if current_user %>
           <%= link_to current_user.member, class: "nav-link" do %>
           <i class="fas fa-user-circle"></i> <%= current_user.first_name %>
-          <% end %>
           <% end %>
         </li>
 
         <li class="nav-item">
-          <% if current_user %>
           <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
-          <% else %>
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          <% end %>
         </li>
       </ul>
     </div>

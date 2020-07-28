@@ -9,3 +9,34 @@
     Diese Seite dient der Verwaltung von Gruppen, Feeds und Verteilerlisten in Threema Work am AJG. Feeds und Verteilerlisten sind nur für die Schulleitung sichtbar. <br><br>
     Andere Einstellungen zu Threema Work nehmen Sie bitte <b><a href="https://work.threema.ch/de">direkt bei Threema WORK</a></b> vor.
 </p>
+<br><br>
+<div class='box_container'>
+
+  <% if current_user.is_user_or_higher %>
+      <%= link_to groups_path do %>
+        <div class='box shadow'>
+          <h3 class='box_header'><i class="fas fa-users"></i> Gruppen</h3>
+          Erstellen und verwalten Sie Gruppenchats für die Team-Kollaboration. Moderieren Sie die Diskussion direkt von Ihrem PC aus, auch ohne Mobilgerät.<br><br>
+        </div>
+      <% end %>
+  <% end %>
+
+  <% if current_user.is_admin_or_higher %>
+      <%= link_to distribution_lists_path do %>
+        <div class="box shadow">
+          <h3 class='box_header'><i class="fas fa-bullhorn"></i> Verteilerlisten</h3>
+          Perfekt für die klassische Top-Down-Kommunikation. Verwalten Sie Listen von Kontakten, bestimmen Sie die Empfänger und erreichen Sie so gezielt und schnell alle gewünschten Adressaten.<br><br>
+        </div>
+        <% end %>
+    <% end %>
+
+    <% if current_user.is_management_or_higher %>
+        <%= link_to feeds_path do %>
+        <div class="box shadow">
+          <h3 class='box_header'><i class="fas fa-rss"></i> Feeds </h3>
+          Ideal für dynamische Newsletter. Nutzer melden sich bei den gewünschten Feeds an und können sich jederzeit wieder abmelden.
+        </div>
+        <% end %>
+    <% end %>
+
+  </div>

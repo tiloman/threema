@@ -1,24 +1,20 @@
 <div class="action_buttons">
-  <%= link_to "+ Einladen", new_user_invitation_path, class:"btn btn-primary btn-sm" %>
+  <%= link_to "Benutzer Einladen", new_user_invitation_path, class:"btn btn-primary btn-sm" %>
 </div>
 
 <h1>Benutzerverwaltung</h1>
+<%= render "users/user_roles" %>
 
-
+<br><br><br>
 <h3>Dein Kollegium:</h3>
-<p><b>Benutzer</b> können: Gruppen erstellen und verwalten.<br>
-<b>Verwaltung</b> kann zusätzlich Feeds senden.<br>
-<b>Administratoren</b> können zusätzlich: Verteilerlisten erstellen, verwalten und Nachrichten senden. Darüber hinaus können Adminstratoren die Rechte anderer Benutzer verändern.</p>
 <br>
-
-
 <table class="table table-hover ">
   <thead>
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Threema ID</th>
       <th scope="col">Rolle</th>
-      <th scope="col">Löschen</th>
+      <th scope="col" style="text-align: right"></th>
     </tr>
   </thead>
   <tbody>
