@@ -1,7 +1,7 @@
 <h2><%= @feed.name %></h2>
 <%= @feed.members.count %> Empfänger
 
-<%= link_to "Nachricht senden", feed_new_message_path(@feed.id), class:"btn btn-primary btn-block" %>
+<%= link_to "Nachricht senden", feed_new_message_path(@feed.id), class:"btn btn-primary btn-block btn-lg" %>
 <br><br>
 
 <div class="feed-message-container">
@@ -12,6 +12,12 @@
 </div>
 <% end %>
 </div>
+
+<% if @all_messages.count > 3 && params[:show_all_messages].nil?%>
+<%= button_to "Mehr anzeigen (#{@all_messages.count - 3})", @feed, method: :get, params: { show_all_messages: "sd" }, class:"btn btn-outline-primary btn-sm" %>
+<% elsif  params[:show_all_messages]%>
+<%= button_to "Weniger anzeigen", @feed, method: :get, params: { }, class:"btn btn-outline-primary btn-sm" %>
+<% end %>
 
 <br><br>
 <table class="table table-hover ">

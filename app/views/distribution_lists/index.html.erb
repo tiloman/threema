@@ -12,7 +12,23 @@
 </div>
 <% end %>
 
+<div class="digg_pagination">
+  <%= will_paginate @lists %>
+</div>
+<%= form_tag distribution_lists_path, method: :get do %>
+  <div style="width: 60px; float: left;margin-right: 8px;">
+      <%= select_tag :per_page, options_for_select([10, 25, 50, 100], params[:per_page]),class: "custom-select custom-select-sm", :onchange => "this.form.submit();" %>
+  </div>
+  <small>Ergebnisse pro Seite</small>
+<% end %>
+<br>
+<hr>
+
 <br><br>
 <div class="list_flex_container">
 <%= render @lists %>
+</div>
+
+<div style="float: right">
+<%= page_entries_info  @lists, :model => 'distribution_list' %>
 </div>

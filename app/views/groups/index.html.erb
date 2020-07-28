@@ -13,14 +13,6 @@
 <% end %>
 
 
-
-
-
-<div class="group_flex_container">
-
-<%= render @groups %>
-</div>
-
 <div class="digg_pagination">
   <%= will_paginate @groups %>
 </div>
@@ -30,3 +22,15 @@
   </div>
   <small>Ergebnisse pro Seite</small>
 <% end %>
+<br>
+<hr>
+
+
+<div class="group_flex_container">
+
+<%= render @groups %>
+</div>
+
+<div style="float: right">
+<%= page_entries_info  @groups, :model => 'group' %>
+</div>

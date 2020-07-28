@@ -28,6 +28,10 @@ class DistributionListsController < ApplicationController
   end
 
   def index
+    unless params[:per_page].present?
+      params[:per_page] = 10 #default
+    end
+
     if params[:search].present?
       search = params[:search].downcase
       lists = DistributionList.where("LOWER(name) LIKE ? ", "%#{search}%")
@@ -35,7 +39,7 @@ class DistributionListsController < ApplicationController
       lists = DistributionList.all
     end
 
-    @lists = lists
+    @lists = lists.paginate(page: params[:page],  :per_page => params[:per_page])
   end
 
   def edit

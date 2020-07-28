@@ -1,7 +1,7 @@
 <h1><%= @member.name %></h1>
 <i><%= @member.nickname %></i><br><br>
 <hr>
-<h3>Gruppen <span id="toggle_groups" style="float: right" class="btn btn-primary">
+<h3>Gruppen <span id="toggle_groups" style="float: right" class="btn btn-outline-primary">
   <i class="far fa-eye"></i>
   </span></h3></h3>
 Mitglied in <%= @member.groups.count %> Gruppen.
@@ -11,7 +11,7 @@ Mitglied in <%= @member.groups.count %> Gruppen.
 </div>
 
 <hr>
-<h3>Verteilerlisten <span id="toggle_lists" style="float: right" class="btn btn-primary">
+<h3>Verteilerlisten <span id="toggle_lists" style="float: right" class="btn btn-outline-primary">
   <i class="far fa-eye"></i>
   </span></h3>
 Empfänger von <%= @member.distribution_lists.count %> Verteilerlisten.
@@ -21,7 +21,7 @@ Empfänger von <%= @member.distribution_lists.count %> Verteilerlisten.
 </div>
 
 <hr>
-<h3>Feeds <span id="toggle_feeds" style="float: right" class="btn btn-primary">
+<h3>Feeds <span id="toggle_feeds" style="float: right" class="btn btn-outline-primary">
   <i class="far fa-eye"></i>
   </span></h3>
 Empfänger von <%= @member.feeds.count %> Feeds.

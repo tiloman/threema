@@ -25,7 +25,7 @@ $(document).on('turbolinks:load', function () {
 
     $( "#group_container" ).hide()
     $( "#toggle_groups" ).click(function() {
-      $( "#group_container" ).toggle( "slow", function() {
+      $( "#group_container" ).toggle( "fast", function() {
         // Animation complete.
       });
     });

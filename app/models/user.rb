@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :threema_id,  presence: true
 
+  default_scope {order(last_name: :asc)}
+
   scope :admins, -> { where(role: "Administrator") }
   scope :owners, -> { where(role: "Besitzer") }
 
@@ -77,8 +79,9 @@ class User < ApplicationRecord
 
   def invitation_accepted_notification
     UserMailer.welcome_email(self).deliver_later
-    puts "**********EINLADUNG AKZEPTIERT******************"
-    puts self.name
+    User.owners.each do |owner|
+      AdminMailer.invitation_accepted(self, owner).deliver_later
+    end
   end
 
   def role_changed_mail

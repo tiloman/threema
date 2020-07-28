@@ -1,5 +1,5 @@
 <div class="action_buttons">
-<%= link_to "Bearbeiten", edit_distribution_list_path, class:"btn btn-outline-primary btn-sm" %>
+  <%= link_to "Bearbeiten", edit_distribution_list_path, class:"btn btn-outline-primary btn-sm" unless @list.name == "All"%>
 </div>
 
 
@@ -7,7 +7,7 @@
 
 <%= @members.count %> Empfänger<br>
 <br>
-<%= link_to "Nachricht senden", distribution_list_send_message_path(@list.id), class:"btn btn-primary btn-block" %>
+<%= link_to "Nachricht senden", distribution_list_send_message_path(@list.id), class:"btn btn-primary btn-block btn-lg" %>
 <br><br>
 <table class="table table-hover ">
   <thead>

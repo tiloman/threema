@@ -9,7 +9,14 @@ class FeedsController < ApplicationController
   def show
     set_feed
     @members = @feed.members
-    @messages = get_feed_chat(@feed)
+    @all_messages = get_feed_chat(@feed)
+
+    if params[:show_all_messages].present?
+      messages = @all_messages
+    else
+      messages = @all_messages.first(3)
+    end
+    @messages = messages
   end
 
   def index
