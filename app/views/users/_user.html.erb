@@ -19,7 +19,11 @@
     <% end %>
   </td>
   <td><%= form_for user, :url => {action: "update_user_role", params: {id: user.id}}, method: "put" do %>
+    <% if current_user == user %>
+    <%= current_user.role %>
+    <% else %>
     <%= select_tag :role, options_for_select(['Unbestätigt', 'Benutzer', 'Verwaltung', 'Administrator', 'Besitzer'], user.role), class: "custom-select custom-select-sm", :onchange => "this.form.submit();" %>
+    <% end %>
   <% end %>
 </td>
 <td>

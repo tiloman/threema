@@ -8,6 +8,8 @@ class User < ApplicationRecord
   before_update :validate_threema_account_data
 
   after_create :new_user_job
+  after_invitation_accepted :invitation_accepted_notification
+
   after_save :role_changed_mail#, if role_changed?
 
   validates :first_name, :last_name, :threema_id,  presence: true
@@ -43,11 +45,15 @@ class User < ApplicationRecord
   end
 
   def is_unconfirmed
-    self.role == "unconfirmed"
+    self.role == "Unbestätigt"
   end
 
   def member
     Member.find_by(threema_id: self.threema_id)
+  end
+
+  def not_signed_up
+    self.first_name.nil?
   end
 
   private
@@ -64,11 +70,23 @@ class User < ApplicationRecord
   end
 
   def new_user_job
-    NewUserJob.perform_later(self)
+    NewUserJob.perform_later(self) unless self.not_signed_up
+    puts "**********NEUER USER******************"
+    puts self.first_name unless self.not_signed_up
+  end
+
+  def invitation_accepted_notification
+    UserMailer.welcome_email(self).deliver_later
+    puts "**********EINLADUNG AKZEPTIERT******************"
+    puts self.name
   end
 
   def role_changed_mail
-    UserMailer.role_changed(self, self.saved_change_to_role).deliver_later if self.saved_change_to_role
+    if self.saved_change_to_role
+      UserMailer.role_changed(self, self.saved_change_to_role).deliver_later unless self.not_signed_up
+      puts "****************************"
+      puts self.saved_change_to_role[1] unless self.not_signed_up
+    end
   end
 
 end

@@ -8,6 +8,9 @@
       <%= f.text_field field, class:"form-control", placeholder: "E-Mail Adresse eingeben" %>
     </div>
   <% end -%>
+<br>Rolle:<br>
+  <%= f.select :role, options_for_select(['Benutzer', 'Verwaltung', 'Administrator', 'Besitzer'], @user.role), {}, { class: "custom-select" } %>
+
 
 <br><br>
   <div class="actions">
