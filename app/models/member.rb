@@ -64,7 +64,7 @@ class Member < ApplicationRecord
       end
 
       if Member.all.count != response['users'].count
-        Member.each do |member|
+        Member.all.each do |member|
           if response['users'].map { |m| m['id'] }.exclude?(member.threema_id)
             member.destroy
           end
