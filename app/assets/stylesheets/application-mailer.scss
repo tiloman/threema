@@ -45,7 +45,15 @@ a {
   color: $primary;
 }
 
+.btn {
+  background-color: $primary;
+  color: white;
+  padding: 5px;
 
+  padding-left: 1em;
+  padding-right: 1em;
+
+}
 
 .center {
   margin: auto;

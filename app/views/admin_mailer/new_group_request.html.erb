@@ -4,6 +4,7 @@
 <br>
 Bitte bestätige die Gruppe, damit sie mit Threema synchronisiert werden kann.
 <br><br>
-<%= link_to "zur Gruppe", show_group_url(@group.id) %>
-
+<%= link_to group_url(@group.id) do %>
+<span class="btn btn-primary">zur Gruppe </span>
+<% end %>
 <br>
