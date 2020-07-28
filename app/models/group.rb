@@ -19,7 +19,7 @@ class Group < ApplicationRecord
   private
 
   def upload_image
-    if self.saved_change_to_avatar
+    if self.avatar
       UploadImageJob.perform_later(self)
     end
   end
