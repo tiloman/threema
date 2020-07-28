@@ -61,11 +61,14 @@ class User < ApplicationRecord
   private
 
   def validate_threema_account_data
-    if self.threema_id
-      member = Member.find_by(threema_id: self.threema_id)
-
-      if self.first_name.downcase != member.first_name.downcase || self.last_name.downcase != member.last_name.downcase
-        errors[:base] << "Die bei Threema hinterlegten Daten stimmen nicht mit den hier eingegebenen Daten überein."
+    if threema_id
+      if member = Member.find_by(threema_id: threema_id)
+        if first_name.downcase != member.first_name.downcase || last_name.downcase != member.last_name.downcase
+          errors[:base] << "Die bei Threema hinterlegten Daten stimmen nicht mit den hier eingegebenen Daten überein."
+          throw :abort
+        end
+      else
+        errors[:base] << "Die Threema ID kann im System nicht gefunden werden."
         throw :abort
       end
     end

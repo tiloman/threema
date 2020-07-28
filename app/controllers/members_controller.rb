@@ -1,10 +1,9 @@
 class MembersController < ApplicationController
   before_action :authenticate_user!
   before_action :user_confirmed_by_admin?
-
-
+  before_action :set_member, only: [:show]
+  before_action :show_only_for_management_or_higher, only: [:show]
   def show
-    set_member
   end
 
   def index
@@ -35,6 +34,10 @@ private
 
   def set_member
     @member = Member.find(params[:id])
+  end
+
+  def show_only_for_management_or_higher
+    redirect_to members_path, notice: "Keine Berechtigung." unless current_user.member == @member || current_user.is_management_or_higher
   end
 
 end

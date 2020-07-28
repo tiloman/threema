@@ -23,7 +23,7 @@
   <% end %>
   <% else %>
   <h5>Gruppe wurde noch nicht veröffentlicht.</h5><br>
-  <%= link_to 'Gruppe mit Threema synchronisieren', group_create_group_in_threema_path(@group), method: :put, data: { confirm: 'Die Gruppe wird auf Threema hochgeladen. Fortfahren?' }, class: "btn btn-primary btn-block" %>
+  <%= link_to 'Gruppe mit Threema synchronisieren', group_create_group_in_threema_path(@group), method: :put, data: { confirm: 'Die Gruppe wird auf Threema hochgeladen. Fortfahren?' }, class: "btn btn-primary btn-block" if current_user.is_management_or_higher%>
 <% end %>
 
 

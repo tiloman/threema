@@ -57,10 +57,18 @@ class Member < ApplicationRecord
 
       response['users'].each do |m|
         member = Member.find_or_initialize_by(threema_id: m['id'])
-        member.update_attribute(:first_name, m['firstName']) #if m['firstName'] #!= member.first_name
-        member.update_attribute(:last_name, m['lastName']) #if m['lastName'] #!= member.last_name
-        member.update_attribute(:category, m['category'])# if m['category'] #!= member.category
-        member.update_attribute(:nickname, m['nickname'])# if m['category'] #!= member.category
+        member.update_column(:first_name, m['firstName']) if m['firstName'] != member.first_name
+        member.update_column(:last_name, m['lastName']) if m['lastName'] != member.last_name
+        member.update_column(:category, m['category']) if m['category'] != member.category
+        member.update_column(:nickname, m['nickname']) if m['nickname'] != member.nickname
+      end
+
+      if Member.all.count != response['users'].count
+        Member.each do |member|
+          if response['users'].map { |m| m['id'] }.exclude?(member.threema_id)
+            member.destroy
+          end
+        end
       end
 
     end

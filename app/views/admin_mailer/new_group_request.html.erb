@@ -1,0 +1,9 @@
+<h1>Neue Gruppe </h1>
+
+<%= @user.name %> hat soeben <b><%= @group.name %></b> mit <%= @group.members.count %> Mitgliedern gegründet.
+<br>
+Bitte bestätige die Gruppe, damit sie mit Threema synchronisiert werden kann.
+<br><br>
+<%= link_to "zur Gruppe", show_group_url(@group.id) %>
+
+<br>

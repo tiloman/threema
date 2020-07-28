@@ -1,8 +1,9 @@
 class GroupsController < ApplicationController
 before_action :authenticate_user!
 before_action :user_confirmed_by_admin?
-before_action :is_management_or_higher, only: [:group_requests, :create_group_in_threema, :index]
-
+before_action :is_management_or_higher, only: [:group_requests, :create_group_in_threema]
+before_action :set_group, only: [:edit, :update, :show, :destroy]
+before_action :is_member_of_group, only: [:show]
 
 include GroupsHelper
 
@@ -19,6 +20,14 @@ include GroupsHelper
       if @group.save
         format.html { redirect_to @group, notice: 'Gruppe wurde erfolgreich erstellt' }
         format.json { render :show, status: :created, location: @group }
+        if current_user.is_management_or_higher
+          create_group(@group, @group.name, @group.members.map { |m| m.threema_id }.to_a, @group.saveChatHistory) unless @group.threema_id
+        else
+          puts "---------------------------------------"
+          User.owners.each do |owner|
+            AdminMailer.new_group_request(current_user, @group, owner).deliver_later
+          end
+        end
       else
         format.html { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }
@@ -28,13 +37,11 @@ include GroupsHelper
 
 
   def edit
-    set_group
     @members = Member.all
     @categories = Member.all.map{| m | [m.category, m.category] if m.category != nil }.uniq.reject(&:nil?)
   end
 
   def update
-    set_group
     req = update_group_attributes(@group, params[:group][:name], params[:group][:saveChatHistory])
     if req == 204 || @group.threema_id.nil?
       respond_to do |format|
@@ -61,12 +68,18 @@ include GroupsHelper
       params[:per_page] = 25 #default
     end
 
+    if current_user.is_management_or_higher
+      groups = Group.all
+    else
+      member = Member.find_by(threema_id: current_user.threema_id)
+      groups = member.groups if member
+    end
 
     if params[:search].present?
       search = params[:search].downcase
-      groups = Group.where("LOWER(name) LIKE ? ", "%#{search}%")
+      groups = groups.where("LOWER(name) LIKE ? ", "%#{search}%")
     else
-      groups = Group.all
+      groups = groups
     end
 
     if params[:all_groups].present?
@@ -79,17 +92,12 @@ include GroupsHelper
 
   end
 
-  def my_groups
-    member = Member.find_by(threema_id: current_user.threema_id)
-    @groups = member.groups if member
-  end
 
   def group_requests
     @groups = Group.local_groups.paginate(page: params[:page])
   end
 
   def show
-    set_group
     Member.sync_members_of_group(@group)
     @threema_members = get_members_from_server(@group) if @group.threema_id
     @members = @group.members
@@ -103,7 +111,6 @@ include GroupsHelper
 
 
   def destroy
-    set_group
     if req = delete_group_from_threema(@group) == "204" || @group.threema_id.nil?
       if @group.destroy
         respond_to do |format|
@@ -135,5 +142,9 @@ include GroupsHelper
       params.require(:group).permit(:name, :saveChatHistory, :member_ids => [])
     end
 
+    def is_member_of_group
+      member = Member.find_by(threema_id: current_user.threema_id)
+      redirect_to groups_path, notice: "Keine Berechtigung." unless @group.members.exists?(member.id)
+    end
 
 end

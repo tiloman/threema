@@ -35,7 +35,6 @@ Rails.application.routes.draw do
     put :send_feed_new_message
   end
 
-  get '/groups/my_groups', to: 'groups#my_groups'
   get '/groups/group_requests', to: 'groups#group_requests'
 
   resources :groups do
