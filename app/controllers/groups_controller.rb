@@ -6,6 +6,7 @@ before_action :set_group, only: [:edit, :update, :show, :destroy]
 before_action :is_member_of_group, only: [:show]
 
 include GroupsHelper
+require "base64"
 
   def new
     @group = Group.new
@@ -101,6 +102,7 @@ include GroupsHelper
     Member.sync_members_of_group(@group)
     @threema_members = get_members_from_server(@group) if @group.threema_id
     @members = @group.members
+    @string = Base64.encode64(open("https:#{@group.avatar.url(:medium)}") { |io| io.read })
 
   end
 
@@ -139,7 +141,7 @@ include GroupsHelper
     end
 
     def group_params
-      params.require(:group).permit(:name, :saveChatHistory, :member_ids => [])
+      params.require(:group).permit(:name, :saveChatHistory, :avatar, :member_ids => [])
     end
 
     def is_member_of_group

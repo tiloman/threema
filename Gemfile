@@ -25,6 +25,8 @@ gem 'select2-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
 gem 'whenever', require: false
+gem "paperclip", "~> 6.0.0"
+gem 'aws-sdk-s3' #for storage
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

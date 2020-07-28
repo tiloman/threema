@@ -1,5 +1,6 @@
 
-<%= form_for @group do |form| %>
+<%= form_for @group, html: { multipart: true } do |form| %>
+
   <% if @group.errors.any? %>
     <div id="error_explanation">
       <ul>
@@ -22,11 +23,18 @@
     <h3>Mitglieder </h3><br>
     <%= form.collection_select :member_ids, @members.order(:first_name), :id, :name, {}, {multiple: true} %>
 <br>
+<div class="input-group mb-3">
+<div class="custom-file">
+  <%= form.file_field :avatar, id:"inputGroupFile01" %>
+  <label class="custom-file-label" for="inputGroupFile01">Bild auswählen</label>
+</div>
+</div>
 
 <div class="custom-control custom-switch">
   <%= form.check_box :saveChatHistory, class:"custom-control-input", id: "customSwitch1" %>
   <label class="custom-control-label" for="customSwitch1">Save Chat History</label>
 </div>
+
 
 <%= javascript_tag "add_me(#{current_user_member.id})" if action_name =="new"%>
 
