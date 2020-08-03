@@ -2,7 +2,7 @@ de:
   devise:
     invitations:
       send_instructions: 'Eine Einladung wurde an %{email} gesendet.'
-      invitation_token_invalid: 'Der Einladungs Schlüssel ist nicht gültig!'
+      invitation_token_invalid: 'Der Einladungsschlüssel ist nicht gültig!'
       updated: 'Die Registrierung war erfolgreich.'
       no_invitations_remaining: "Sie können keine weiteren Einladungen mehr vornehmen."
       new:
@@ -15,7 +15,7 @@ de:
       invitation_instructions:
         subject: 'Einladung'
         hello: "Hallo %{email},"
-        someone_invited_you: "Due wurdest eingeladen Threema AJG zu nutzen. Du kannst die Einladung durch klicken des folgenden Links aktzeptieren:"
-        accept: "Aktzeptieren"
+        someone_invited_you: "Du wurdest eingeladen, Threema AJG zu nutzen. Du kannst die Einladung durch Klicken des folgenden Links akzeptieren:"
+        accept: "Akzeptieren"
         accept_until: "Die Einladung ist gültig bis: ..."
         ignore: "Falls du die Einladung nicht annehmen möchtest, ignoriere einfach diese Mail."
