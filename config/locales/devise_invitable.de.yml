@@ -15,7 +15,7 @@ de:
       invitation_instructions:
         subject: 'Einladung'
         hello: "Hallo %{email},"
-        someone_invited_you: "Du wurdest eingeladen, Threema AJG zu nutzen. Du kannst die Einladung durch Klicken des folgenden Links akzeptieren:"
+        someone_invited_you: "Liebe Kollegin, lieber Kollege, die Seite www.teacher.threema.ajg.eu wurde neu programmiert. Ursache waren Bugs und kleinere Fehler sowie Probleme bei den Ladezeiten. Du wirst jetzt eingeladen, die Verwaltung von Gruppen über eine neue Seite zu nutzen. Deine alten Zugangsdaten sind nicht mehr gültig. Du kannst die Einladung zur neuen Seite durch Klicken des folgenden Links akzeptieren:"
         accept: "Akzeptieren"
         accept_until: "Die Einladung ist gültig bis: ..."
         ignore: "Falls du die Einladung nicht annehmen möchtest, ignoriere einfach diese Mail."
