@@ -106,7 +106,12 @@ include GroupsHelper
 
   def create_group_in_threema
     @group = Group.find(params[:group_id])
-    create_group(@group, @group.name, @group.members.map { |m| m.threema_id }.to_a, @group.saveChatHistory) unless @group.threema_id
+    group_response = create_group(@group, @group.name, @group.members.map { |m| m.threema_id }.to_a, @group.saveChatHistory) unless @group.threema_id
+    #redirect_to @group, notice: create_group
+    respond_to do |format|
+      format.html { redirect_to @group, notice: "Gruppe erstellt (#{group_response})" }
+      format.json { head :no_content }
+    end
   end
 
 

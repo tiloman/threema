@@ -33,8 +33,9 @@ module GroupsHelper
 
     response = JSON.parse response_json.body
     group.update_attribute(:threema_id, response['id'])
-
-    response
+    puts response['id']
+    puts "*******************RESPONES***********"
+    return response['id']
   end
 
   def get_threema_ids(member_ids)
@@ -121,6 +122,8 @@ module GroupsHelper
     if group.image
       data = "data:image/jpeg;base64,#{group.image}"
       image_tag data, class:"group-image"
+    elsif group.avatar.present?
+      image_tag group.avatar.url(:medium) , class:"group-image"
     else
       render html: '<div class="group-image"><i class="fas fa-users"></i></div>'.html_safe
     end
@@ -130,6 +133,8 @@ module GroupsHelper
     if group.image
       data = "data:image/jpeg;base64,#{group.image}"
       image_tag data, class:"group-image-big"
+    elsif group.avatar.present?
+      image_tag group.avatar.url(:medium) , class:"group-image-big"
     else
       render html: '<div class="group-image-big"><i class="fas fa-users"></i></div>'.html_safe
     end
@@ -143,7 +148,7 @@ def get_heading_for_table(action, group)
   end
 end
 
-  
+
 
 
 

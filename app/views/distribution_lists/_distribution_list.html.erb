@@ -1,4 +1,16 @@
+<% if current_user.is_admin_or_higher %>
 <%= link_to distribution_list do %>
+<div class="list_item shadow">
+<div class="list-image"><i class="fas fa-bullhorn"></i></div>
+<div class="list-name">
+<%= distribution_list.name %>
+</div>
+<div class="list-members">
+  <%= distribution_list.members.count %> Empfänger
+</div>
+</div>
+<% end %>
+<% else %>
 <div class="list_item shadow">
 <div class="list-image"><i class="fas fa-bullhorn"></i></div>
 <div class="list-name">

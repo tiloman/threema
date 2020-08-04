@@ -1,5 +1,11 @@
   <tr>
-    <td><%= link_to member.name, member  %></td>
+    <td>
+      <% if current_user.is_management_or_higher %>
+        <%= link_to member.name, member  %>
+      <% else %>
+        <%= member.name %>
+      <% end %>
+    </td>
     <td><%= member.category %></td>
     <td><%= member.threema_id %></td>
   </tr>

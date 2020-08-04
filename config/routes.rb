@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   get '/groups/group_requests', to: 'groups#group_requests'
 
   resources :groups do
-    put :create_group_in_threema
+    post :create_group_in_threema
   end
 
 

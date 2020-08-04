@@ -24,7 +24,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
   def resolve_layout
     case action_name
-    when "edit"
+    when "edit", "update"
       "logged_out"
     else
       "application"

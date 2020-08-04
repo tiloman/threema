@@ -1,11 +1,23 @@
-<%= link_to feed do %>
-<div class="feed_item shadow">
-<div class="feed-image"><i class="fas fa-rss"></i></div>
-<div class="feed-name">
-<%= feed.name %>
-</div>
-<div class="feed-members">
-  <%= feed.members.count %> Empfänger
-</div>
-</div>
+<% if current_user.is_management_or_higher %>
+  <%= link_to feed do %>
+    <div class="feed_item shadow">
+    <div class="feed-image"><i class="fas fa-rss"></i></div>
+    <div class="feed-name">
+    <%= feed.name %>
+    </div>
+    <div class="feed-members">
+      <%= feed.members.count %> Empfänger
+    </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="feed_item shadow">
+  <div class="feed-image"><i class="fas fa-rss"></i></div>
+  <div class="feed-name">
+  <%= feed.name %>
+  </div>
+  <div class="feed-members">
+    <%= feed.members.count %> Empfänger
+  </div>
+  </div>
 <% end %>
