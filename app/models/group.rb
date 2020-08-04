@@ -2,7 +2,10 @@ class Group < ApplicationRecord
   has_many :group_members , dependent: :destroy
   has_many :members, through: :group_members
 
-  has_attached_file :avatar, styles: { medium: "512x512>" }#, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar,
+  styles: { medium: "512x512>" }
+
+
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   validates_uniqueness_of :threema_id, :allow_blank => true, :allow_nil => true
