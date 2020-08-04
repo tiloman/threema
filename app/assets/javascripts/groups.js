@@ -131,3 +131,17 @@ function unSelectAll(){
 
      }
 }
+
+
+
+$(document).on('turbolinks:load', function () {
+  if (document.querySelector('.custom-file')){
+    document.querySelector('.custom-file').addEventListener('change',function(e){
+      var fileName = document.getElementById("inputGroupFile01").files[0].name;
+      var nextSibling = e.target.nextElementSibling
+      nextSibling.innerText = fileName
+    })
+  }
+
+
+})
