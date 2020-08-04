@@ -1,7 +1,11 @@
 module ApplicationHelper
 
   def pending_group_requests
-    Group.local_groups.count if current_user.is_management_or_higher
+    if current_user.is_management_or_higher
+      Group.local_groups.count
+    else
+      return 0
+    end 
   end
 
 end
