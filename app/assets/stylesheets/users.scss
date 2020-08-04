@@ -1,3 +1,19 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.Besitzer {
+  border-left :5px solid $primary;
+
+}
+
+.Benutzer {
+  border-left :5px solid $secondary;
+}
+
+.Verwaltung {
+  border-left :5px solid yellow;
+}
+
+.Administrator {
+  border-left :5px solid green;
+}
