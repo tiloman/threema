@@ -119,22 +119,22 @@ module GroupsHelper
   end
 
   def show_image(group)
-    if group.image
+    if group.avatar.present?
+      image_tag group.avatar.url(:medium) , class:"group-image"
+    elsif group.image
       data = "data:image/jpeg;base64,#{group.image}"
       image_tag data, class:"group-image"
-    elsif group.avatar.present?
-      image_tag group.avatar.url(:medium) , class:"group-image"
     else
       render html: '<div class="group-image"><i class="fas fa-users"></i></div>'.html_safe
     end
   end
 
   def show_big_image(group)
-    if group.image
+    if group.avatar.present?
+      image_tag group.avatar.url(:medium) , class:"group-image-big"
+    elsif group.image
       data = "data:image/jpeg;base64,#{group.image}"
       image_tag data, class:"group-image-big"
-    elsif group.avatar.present?
-      image_tag group.avatar.url(:medium) , class:"group-image-big"
     else
       render html: '<div class="group-image-big"><i class="fas fa-users"></i></div>'.html_safe
     end
