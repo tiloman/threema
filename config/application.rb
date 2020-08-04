@@ -13,7 +13,7 @@ module Threemarails
     config.active_job.queue_adapter = :delayed_job
 
     config.action_mailer.preview_path = "#{Rails.root}/test/mailers/previews"
-    config.action_mailer.asset_host = "http://5992929637995.hostingkunde.de"
+    config.action_mailer.asset_host = "https://threema4teachers.ajg.eu"
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'models', '*', '*.yml').to_s]
     config.i18n.default_locale = :de
