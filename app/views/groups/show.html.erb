@@ -23,6 +23,9 @@
   <% end %>
   <% else %>
   <h5>Gruppe wurde noch nicht veröffentlicht.</h5><br>
+  <% if current_user.role == "Benutzer" %>
+  Ein Administrator wird die Gruppe prüfen und freigeben.
+  <% end %>
   <%= link_to 'Gruppe mit Threema synchronisieren', group_create_group_in_threema_path(@group), method: :post, data: { confirm: 'Die Gruppe wird auf Threema hochgeladen. Fortfahren?' }, class: "btn btn-primary btn-block" if current_user.is_management_or_higher%>
 <% end %>
 
