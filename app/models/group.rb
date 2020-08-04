@@ -22,7 +22,7 @@ class Group < ApplicationRecord
   private
 
   def upload_image
-    if self.avatar_file_name.present?
+    if self.avatar.present?
       UploadImageJob.perform_later(self)
     end
   end
