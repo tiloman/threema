@@ -42,6 +42,7 @@ include GroupsHelper
   end
 
   def update
+    @members = Member.all
     req = update_group_attributes(@group, params[:group][:name], params[:group][:saveChatHistory])
     if req == 204 || @group.threema_id.nil?
       respond_to do |format|
