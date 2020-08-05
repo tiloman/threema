@@ -2,10 +2,10 @@
 <%= text_field_tag :search, params[:search], placeholder: "Suchen..", class: "form-control" %>
 <br>
 
-<div class='tableBox' id="usersTable">
+<div class='tableBox'>
     <table>
       <thead>
-        <%= render html: "<th ><input type='checkbox' id='allUsersBox'/></th>".html_safe if action_name != "show"%>
+        <%= render html: "<th ><input type='checkbox' onclick='selectAll()' id='allUsersBox'/></th>".html_safe if action_name != "show"%>
         <th onclick="sortUsersTable(1)" style="width: 30%"><i class="fas fa-sort"></i> Vorname</th>
         <th onclick="sortUsersTable(2)" style="width: 30%"><i class="fas fa-sort"></i> Nachname</th>
         <th onclick="sortUsersTable(3)" style="width: 30%"><i class="fas fa-sort"></i> Kategorie</th>
@@ -16,12 +16,12 @@
             <tr>
               <% if action_name != "show" %>
               <td style='width: 50px'>
-                <span class="btn btn-primary btn-sm" id="<%= member.id %>" onclick="addMemberToSelect('<%= member.id %>', this)">
+                <span class="btn btn-primary btn-sm user_checkbox" id="<%= member.id %>" onclick="addMemberToSelect('<%= member.id %>', this)" class="">
                   <i class="fas fa-user-plus"></i>
                   </span>
               </td>
               <% end %>
-              <td style='width: 30%' onclick="addMemberToSelect('<%= member.id %>')"><%= member.first_name %></td>
+              <td style='width: 30%'><%= member.first_name %></td>
               <td style='width: 30%'><%= member.last_name %></td>
               <td style='width: 30%'><%= member.category %></td>
               <td style='width: 30%'><%= member.threema_id %></td>
