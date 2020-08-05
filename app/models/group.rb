@@ -17,7 +17,8 @@ class Group < ApplicationRecord
   scope :include_deleted, -> { self.all.unscoped }
   scope :local_groups, -> { where(threema_id: ['', nil]) }
 
-  after_save :upload_image#, if role_changed?
+  after_save :upload_image
+  after_update :group_approved
 
   private
 
@@ -26,4 +27,9 @@ class Group < ApplicationRecord
       UploadImageJob.perform_later(self)
     end
   end
+
+  def group_approved
+    UserMailer.group_approved(self, User.find(self.created_by)).deliver_later if self.saved_change_to_threema_id && self.threema_id.present?
+  end
+
 end

@@ -13,7 +13,10 @@
 </h1>
 
 
-<%= @group.state %> <br>
+<% @group.state %> <br>
+<% if @group.created_by %>
+Gegründet: <%= User.find(@group.created_by).name %><br>
+<% end %>
 <% if @threema_members %>
   <% if @threema_members.count != @group.members.count %>
   <h5>Nicht synchronisiert!</h5>

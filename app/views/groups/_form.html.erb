@@ -17,7 +17,9 @@
   <div class="actions">
     <br>
     Name der Gruppe: <br>
-    <%= form.text_field :name, placeholder: "Gruppenname", class:"form-control form-control-lg" %><br>
+    <%= form.text_field :name, placeholder: "Gruppenname", class:"form-control form-control-lg" %>
+    <%= render "groups/naming_convention" %>
+<br>
     <%= render 'members/members_table', :locals => {:members => @members} %>
 
     <h3>Mitglieder </h3><br>
@@ -29,11 +31,8 @@
   <label class="custom-file-label" for="inputGroupFile01">Bild auswählen</label>
 </div>
 </div>
-
-<div class="custom-control custom-switch">
-  <%= form.check_box :saveChatHistory, class:"custom-control-input", id: "customSwitch1" %>
-  <label class="custom-control-label" for="customSwitch1">Save Chat History</label>
-</div>
+<%= form.hidden_field :created_by, :value => current_user.id %>
+<%= form.hidden_field :saveChatHistory, :value => false %>
 
 
 <%= javascript_tag "add_me(#{current_user_member.id})" if action_name =="new"%>

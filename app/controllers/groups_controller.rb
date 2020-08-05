@@ -27,6 +27,7 @@ include GroupsHelper
           User.owners.each do |owner|
             AdminMailer.new_group_request(current_user, @group, owner).deliver_later
           end
+          UserMailer.group_requested(@group, current_user).deliver_later
         end
       else
         format.html { render :new }
@@ -145,7 +146,7 @@ include GroupsHelper
     end
 
     def group_params
-      params.require(:group).permit(:name, :saveChatHistory, :avatar, :member_ids => [])
+      params.require(:group).permit(:name, :saveChatHistory, :avatar, :created_by, :member_ids => [])
     end
 
     def is_member_of_group

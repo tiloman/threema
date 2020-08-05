@@ -11,4 +11,15 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Threema AJG | Neue Benutzerrolle')
   end
 
+  def group_requested(group, user)
+    @user = user
+    @group = group
+    mail(to: @user.email, subject: 'Threema AJG | Anfrage zur Gruppengründung')
+  end
+
+  def group_approved(group, user)
+    @user = user
+    @group = group
+    mail(to: @user.email, subject: 'Threema AJG | Deine Gruppe wurde genehmigt.')
+  end
 end

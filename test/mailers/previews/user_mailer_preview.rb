@@ -9,4 +9,12 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.role_changed(User.first, ["Verwaltung", "Benutzer"])
   end
 
+  def group_requested
+    UserMailer.group_requested(Group.first, User.first)
+  end
+
+  def group_approved
+    UserMailer.group_approved(Group.first, User.first)
+  end
+
 end
