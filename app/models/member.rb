@@ -56,7 +56,7 @@ class Member < ApplicationRecord
       response = JSON.parse json_members.body
 
       response['users'].each do |m|
-        member = Member.find_or_initialize_by(threema_id: m['id'])
+        member = Member.find_or_create_by(threema_id: m['id'])
         member.update_column(:first_name, m['firstName']) if m['firstName'] != member.first_name
         member.update_column(:last_name, m['lastName']) if m['lastName'] != member.last_name
         member.update_column(:category, m['category']) if m['category'] != member.category
