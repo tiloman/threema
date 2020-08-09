@@ -31,14 +31,14 @@
   <label class="custom-file-label" for="inputGroupFile01">Bild auswählen</label>
 </div>
 </div>
-<%= form.hidden_field :created_by, :value => current_user.id %>
+<%= form.hidden_field :created_by, :value => current_user.id%>
 <%= form.hidden_field :saveChatHistory, :value => false %>
+<div id="current_user_member" style="display: none"><%= current_user_member.id %></div>
 
-
-<%= javascript_tag "add_me(#{current_user_member.id})" if action_name =="new"%>
+<%= javascript_tag "add_me(#{current_user_member.id})" if action_name == "new"%>
 
 
 <br><br>
-    <%= form.submit 'Speichern', class: "btn btn-primary" %>
+    <%= form.submit 'Speichern', class: "btn btn-primary"%>
   </div>
 <% end %>

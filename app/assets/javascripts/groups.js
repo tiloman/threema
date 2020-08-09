@@ -8,6 +8,11 @@ $(document).on('turbolinks:load', function () {
 
     $("#search").on("keyup", function() {
       var value = $(this).val().toLowerCase();
+      if (value != "") {
+        document.getElementById("allUsersBox").style.display = "block";
+      } else {
+        document.getElementById("allUsersBox").style.display = "none";
+      }
       $("#usersTable tr").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
       });
@@ -28,6 +33,28 @@ $(document).on('turbolinks:load', function () {
       $( "#group_container" ).toggle( "fast", function() {
         // Animation complete.
       });
+    });
+
+//check if user is in list before submit
+    $('#new_group').submit(function() {
+      if ($('#group_member_ids').length) {
+        var select2_form = $('#group_member_ids');
+      }
+
+      var selected_now = select2_form.val();
+      if (selected_now != null ){
+        var members = selected_now.map(x => x);
+      } else {
+        var members = [];
+      }
+
+      var current_user = document.getElementById('current_user_member').innerHTML
+      var is_in_group = members.includes(current_user);
+
+      if (is_in_group == false) {
+        return confirm("Du bist aktuell nicht Teil der zu erstellenden Gruppe. Falls das so gewollt ist, bestätige mit 'OK'. \nAndernfalls klicke auf 'Abbrechen' und füge dich hinzu, bevor du die Gruppe erstellst.");
+      }
+
     });
 })
 
@@ -139,6 +166,7 @@ function add_me(user) {
 
 
 
+
 $(document).on('turbolinks:load', function () {
   if (document.querySelector('.custom-file')){
     document.querySelector('.custom-file').addEventListener('change',function(e){
@@ -150,59 +178,3 @@ $(document).on('turbolinks:load', function () {
 
 
 })
-
-
-// function sortUsersTable(n) {
-//   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-//   table = document.getElementById("usersTable");
-//   switching = true;
-//   // Set the sorting direction to ascending:
-//   dir = "asc";
-//   /* Make a loop that will continue until
-//   no switching has been done: */
-//   while (switching) {
-//     // Start by saying: no switching is done:
-//     switching = false;
-//     rows = table.rows;
-//     /* Loop through all table rows (except the
-//     first, which contains table headers): */
-//     for (i = 1; i < (rows.length - 1); i++) {
-//       // Start by saying there should be no switching:
-//       shouldSwitch = false;
-//       /* Get the two elements you want to compare,
-//       one from current row and one from the next: */
-//       x = rows[i].getElementsByTagName("TD")[n];
-//       y = rows[i + 1].getElementsByTagName("TD")[n];
-//       /* Check if the two rows should switch place,
-//       based on the direction, asc or desc: */
-//       if (dir == "asc") {
-//         if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-//           // If so, mark as a switch and break the loop:
-//           shouldSwitch = true;
-//           break;
-//         }
-//       } else if (dir == "desc") {
-//         if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-//           // If so, mark as a switch and break the loop:
-//           shouldSwitch = true;
-//           break;
-//         }
-//       }
-//     }
-//     if (shouldSwitch) {
-//       /* If a switch has been marked, make the switch
-//       and mark that a switch has been done: */
-//       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-//       switching = true;
-//       // Each time a switch is done, increase this count by 1:
-//       switchcount ++;
-//     } else {
-//       /* If no switching has been done AND the direction is "asc",
-//       set the direction to "desc" and run the while loop again. */
-//       if (switchcount == 0 && dir == "asc") {
-//         dir = "desc";
-//         switching = true;
-//       }
-//     }
-//   }
-// }
