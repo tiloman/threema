@@ -67,7 +67,7 @@ include GroupsHelper
 
   def index
     unless params[:per_page].present?
-      params[:per_page] = 25 #default
+      params[:per_page] = 50 #default
     end
 
     if current_user.is_management_or_higher

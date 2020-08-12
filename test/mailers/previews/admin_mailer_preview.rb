@@ -13,4 +13,8 @@ class AdminMailerPreview < ActionMailer::Preview
     AdminMailer.new_group_request(User.first, Group.first, User.first)
   end
 
+  def daily_info
+    AdminMailer.daily_info(User.first)
+  end
+
 end

@@ -63,6 +63,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
+  def after_update_path_for(resource)
+       flash[:notice] = "Einstellungen wurden aktualisiert."
+       edit_user_registration_path
+   end
+
+
   def resolve_layout
     case action_name
     when "new", "create"

@@ -47,7 +47,35 @@ Name
   </div>
 
 <br>
-Benutzerrolle: <%= resource.role %><br><br>
+<% if current_user.is_owner %>
+  <hr>
+  <h5> Mail Benachrichtigungen </h5><br>
+  <div class="custom-control custom-switch">
+      <%= f.check_box :mail_admin_new_user, class: "custom-control-input", id: "customSwitch1"   %>
+      <label class="custom-control-label" for="customSwitch1">Neuer Benutzer hat sich registriert </label>
+    </div>
+    <br />
+
+  <div class="custom-control custom-switch">
+      <%= f.check_box :mail_admin_invitation_accepted, class: "custom-control-input", id: "customSwitch2"   %>
+      <label class="custom-control-label" for="customSwitch2">Ein Benutzer hat die Einladung akzeptiert</label>
+    </div>
+    <br />
+
+  <div class="custom-control custom-switch">
+      <%= f.check_box :mail_admin_new_group_request, class: "custom-control-input", id: "customSwitch3"   %>
+      <label class="custom-control-label" for="customSwitch3">Ein Benutzer hat eine neue Gruppe gegründet</label>
+  </div>
+    <br />
+
+  <div class="custom-control custom-switch">
+      <%= f.check_box :mail_admin_daily_info, class: "custom-control-input", id: "customSwitch4"   %>
+      <label class="custom-control-label" for="customSwitch4">Zusammenfassung von Neuigkeiten (wird täglich gesendet wenn es neue Gruppen oder Benutzer gibt)</label>
+  </div>
+    <br />
+
+<% end %>
+Benutzerrolle: <b><%= resource.role %></b><br><br>
 
   <div class="actions">
     <%= f.submit "Daten aktualisieren", class:"btn btn-primary" %>
