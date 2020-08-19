@@ -1,8 +1,9 @@
 <tr class="<%= user.role %>">
   <td>
     <% if user.first_name.present? %>
-    <%= user.first_name %>
-    <%= user.last_name %><br>
+    <% member = Member.find_by(threema_id: user.threema_id) %>
+    <%= link_to user.name, member %>
+  <br>
     <%= user.email %>
 
     <% else %>
