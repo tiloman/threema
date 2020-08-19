@@ -16,4 +16,5 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require select2
+//= require cookies_eu
 //= require_tree .

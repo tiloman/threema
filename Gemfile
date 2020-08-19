@@ -28,6 +28,7 @@ gem 'whenever', require: false
 gem "paperclip", "~> 6.0.0"
 gem 'aws-sdk-s3' #for storage
 gem 'google-analytics-rails', '1.1.1'
+gem 'cookies_eu'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

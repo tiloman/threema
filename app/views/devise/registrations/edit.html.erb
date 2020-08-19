@@ -7,25 +7,26 @@ Name
   <div class="form-row">
 
    <div class="col">
-     <%= f.text_field :first_name, autofocus: true, class: "form-control", placeholder: "Vorname" %>
+     <%= f.text_field :first_name, autofocus: true, class: "form-control", placeholder: "Vorname", disabled: true %>
    </div>
    <div class="col">
-     <%= f.text_field :last_name, autofocus: true, class: "form-control", placeholder: "Nachname" %>
+     <%= f.text_field :last_name, autofocus: true, class: "form-control", placeholder: "Nachname", disabled: true %>
    </div>
  </div>
 
 <br>
 
+
+  <div class="field">
+    Threema ID
+    <%= f.text_field :threema_id, class: "form-control", placeholder: "Threema ID", disabled: true %>
+  </div>
+  <br>
+
   <div class="field">
     Email
     <%= f.email_field :email, autofocus: true, class: "form-control", autocomplete: "email", placeholder: "E-Mail" %>
   </div>
-<br>
-  <div class="field">
-    Threema ID
-    <%= f.text_field :threema_id, class: "form-control", placeholder: "Threema ID" %>
-  </div>
-
 
 <hr>
 
