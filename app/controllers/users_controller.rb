@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     @users = User.where.not(first_name: ['', nil])
     @invited_users = User.where(first_name: ['', nil])
-    @unconfirmed_users = User.where(role: [nil, '', "Unbestätigt"])
+    @unconfirmed_users = User.where(role: [nil, '', "Unbestätigt", "unconfirmed"])
   end
 
   def update_user_role
