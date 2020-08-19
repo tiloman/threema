@@ -13,17 +13,25 @@
   <br><br>
 <% end %>
 
-<% if @new_users.any? %>
-  <h3>Benutzer</h3>
+<% if @new_users.any? || @unconfirmed_users.any?%>
+  <h3>Neue Benutzer</h3>
   Es haben sich in den letzten 24h <b><%= @new_users.count %> Benutzer</b> registriert oder wurden eingeladen.<br>
-
   <br>
 
   <% @new_users.each do |user| %>
   <li>
     <%= user.email %> |
     <%= user.role %>
-
   </li>
   <% end %>
+
+  <% if @unconfirmed_users.any? %>
+    Es gibt Benutzer, denen noch <b>keine Rolle</b> zugewiesen wurde:
+    <% @unconfirmed_users.each do |user| %>
+      <li>
+        <%= user.name %>
+      </li>
+    <% end %>
+  <% end %>
+
 <% end %>
