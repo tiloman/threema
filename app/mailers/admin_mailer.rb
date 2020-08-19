@@ -27,7 +27,7 @@ class AdminMailer < ApplicationMailer
       @admin = admin
       @groups = Group.where(threema_id: [nil,""])
       @new_users = User.where("created_at BETWEEN ? AND ?", Time.now - 24.hours , Time.now)
-      @unconfirmed_users = User.where(role: "Unbestätigt")
+      @unconfirmed_users = User.where(role: [nil, '', "Unbestätigt"])
       mail(to: admin.email, subject: 'Neuigkeiten bei Threema AJG') if @groups.any? || @new_users.any? || @unconfirmed_users.any?
     end
   end
