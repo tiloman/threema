@@ -44,5 +44,7 @@ Rails.application.routes.draw do
 
   resources :members
 
+  match '*path' => redirect('/'), via: :get
+
 
 end
