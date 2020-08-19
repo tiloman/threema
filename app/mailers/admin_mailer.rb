@@ -26,7 +26,7 @@ class AdminMailer < ApplicationMailer
     if admin.mail_admin_daily_info
       @admin = admin
       @groups = Group.where(threema_id: [nil,""])
-      @new_users = User.where("created_at BETWEEN ? AND ?", Time.now - 24.hours , Time.now)
+      @new_users = User.all #.where("created_at BETWEEN ? AND ?", Time.now - 24.hours , Time.now)
       mail(to: admin.email, subject: 'Neuigkeiten bei Threema AJG') if @groups.any? || @new_users.any?
     end
   end
