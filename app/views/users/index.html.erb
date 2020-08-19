@@ -5,7 +5,30 @@
 <h1>Benutzerverwaltung</h1>
 <%= render "users/user_roles" %>
 
+<% if @unconfirmed_users.any? %>
+  <br><br><br>
+  <h3>Benutzer, denen noch keine Rolle zugewiesen wurde:</h3>
+  <br>
+  <table class="table table-hover ">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Threema ID</th>
+        <th scope="col">Rolle</th>
+        <th scope="col" style="text-align: right"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render :partial => "user", :collection => @unconfirmed_users, :as => :user %>
+    </tbody>
+  </table>
+<% end %>
+
+
+
 <br><br><br>
+
+
 <h3>Dein Kollegium:</h3>
 <br>
 <table class="table table-hover ">
@@ -19,6 +42,24 @@
   </thead>
   <tbody>
     <%= render @users %>
-
   </tbody>
 </table>
+
+<% if @invited_users.any? %>
+  <br><br><br>
+  <h3>Eingeladene Benutzer:</h3>
+  <br>
+  <table class="table table-hover ">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Threema ID</th>
+        <th scope="col">Rolle</th>
+        <th scope="col" style="text-align: right"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render :partial => "user", :collection => @invited_users, :as => :user %>
+    </tbody>
+  </table>
+<% end %>
