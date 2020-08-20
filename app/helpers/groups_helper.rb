@@ -115,7 +115,9 @@ module GroupsHelper
       req.headers['Content-Type'] = 'application/json'
       req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
     end
-    request.status
+    puts request.status
+    puts "***********************"
+    return request.status
   end
 
   def show_image(group)

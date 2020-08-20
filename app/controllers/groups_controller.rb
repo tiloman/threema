@@ -118,7 +118,8 @@ include GroupsHelper
 
 
   def destroy
-    if req = delete_group_from_threema(@group) == "204" || @group.threema_id.nil?
+    req = delete_group_from_threema(@group)
+    if req == 204 || @group.threema_id.nil?
       if @group.destroy
         respond_to do |format|
           format.html { redirect_to groups_url, notice: 'Gruppe wurde gelöscht.' }

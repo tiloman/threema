@@ -13,7 +13,7 @@
 </h1>
 
 
-<% @group.state %> <br>
+<%= @group.created_at.strftime("%d.%m.%Y") %> <br>
 <% if @group.created_by %>
 Gegründet: <%= User.find(@group.created_by).name %><br>
 <% end %>
