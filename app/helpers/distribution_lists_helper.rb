@@ -1,9 +1,18 @@
 module DistributionListsHelper
 
-  def send_list_message(list, message)
-    data = {type: "text",
-            body: {"de": message},
-            }
+  def send_list_message(list, message, file, filename)
+    if file == nil
+      data = {type: "text",
+              body: {"de": message},
+              }
+    else
+      data = {type: "file",
+              file: file,
+              filename: filename,
+              caption: {"de": message},
+              }
+    end
+
     response_json = Faraday.post "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/distribution_lists/#{list.threema_id}/chat" do |req|
       req.params['limit'] = 100
       req.headers['Content-Type'] = 'application/json'
@@ -18,6 +27,17 @@ module DistributionListsHelper
 
   end
 
+
+  def get_list_chat(list)
+    response_json = Faraday.get "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/distribution_lists/#{list.threema_id}/chat" do |req|
+      req.params['limit'] = 100
+      req.headers['Content-Type'] = 'application/json'
+      req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
+      #req.body = data.to_json
+    end
+    response = JSON.parse response_json.body
+    return response['messages']
+  end
 
   def update_list_attributes(list, name)
     if list.threema_id

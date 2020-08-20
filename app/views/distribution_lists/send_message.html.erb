@@ -2,11 +2,19 @@
 <h3>Nachricht senden</h3>
 <br><br>
 
-<%= form_with(url: "/distribution_lists/#{@list.id}/send_list_new_message", method: "put") do %>
+<%= form_with(url: "/distribution_lists/#{@list.id}/send_list_new_message", method: "put",  multipart: true) do %>
   <% prefilled_text = "*#{current_user.name} verteilt an #{@list.name}:*\nBitte Text eingeben ..." %>
   <%= text_area_tag "message", prefilled_text,  class: "form-control",rows: "4" ,minlength: 10, maxlength: 3000 %>
   <p class="small">Um Texte <b>fett</b>, <i>kursiv</i> oder durchgestrichen zu formatieren, flankiere sie einfach mit folgenden Zeichen: *fett*, _kursiv_, ~durchgestrichen~.</p>
 <br>
+<div class="input-group mb-3">
+<div class="custom-file">
+  <%= file_field_tag 'attachment', id:"inputGroupFile01" %>
+  <label class="custom-file-label" for="inputGroupFile01">Datei anhängen (optional)</label>
+</div>
+</div>
+
+<br><br>
   <%= submit_tag "Nachricht senden", data: { confirm: "Nachricht senden?" }, class: "btn btn-primary btn-block" %>
 
 <% end %>

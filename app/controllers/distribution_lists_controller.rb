@@ -75,6 +75,14 @@ class DistributionListsController < ApplicationController
   def show
     set_list
     @members = @list.members
+    @all_messages = get_list_chat(@list)
+
+    if params[:show_all_messages].present?
+      messages = @all_messages
+    else
+      messages = @all_messages.first(3)
+    end
+    @messages = messages
   end
 
   def send_message
@@ -86,7 +94,18 @@ class DistributionListsController < ApplicationController
     list = DistributionList.find(params[:distribution_list_id])
     message = params[:message]
 
-    response = send_list_message(list, message )
+    if params[:attachment]
+      filename = params[:attachment].original_filename
+      puts "File attached: #{filename}"
+
+      decoded = params[:attachment].tempfile.open.read.force_encoding(Encoding::UTF_8)
+      file = Base64.encode64(decoded)
+    else
+      file = nil
+      filename = nil
+    end
+
+    response = send_list_message(list, message, file, filename)
     respond_to do |format|
       format.html { redirect_to list, notice: "Die Nachricht wurde versendet. Es kann einige Minuten dauern bis Nachricht angezeigt wird." }
       format.json { head :no_content }

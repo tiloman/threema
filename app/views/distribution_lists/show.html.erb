@@ -9,6 +9,30 @@
 <br>
 <%= link_to "Nachricht senden", distribution_list_send_message_path(@list.id), class:"btn btn-primary btn-block btn-lg" %>
 <br><br>
+<div class="feed-message-container">
+<% @messages.each do | message | %>
+<div class="feed-message shadow">
+<div class="feed-date"><%= (message['createdAt']).to_time.strftime("%d.%m.%Y um %H:%M Uhr")  %></div>
+<% if message['type'] == "file" %>
+  <%= message['caption']['de'] %>
+  <br>
+  <b><i class="fas fa-paperclip"></i></b>
+<% else %>
+  <%= message['body']['de'] %>
+<% end %>
+
+</div>
+<% end %>
+</div>
+
+<% if @all_messages.count > 3 && params[:show_all_messages].nil?%>
+<%= button_to "Mehr anzeigen (#{@all_messages.count - 3})", @feed, method: :get, params: { show_all_messages: "sd" }, class:"btn btn-outline-primary btn-sm" %>
+<% elsif  params[:show_all_messages]%>
+<%= button_to "Weniger anzeigen", @feed, method: :get, params: { }, class:"btn btn-outline-primary btn-sm" %>
+<% end %>
+
+<br><br>
+
 <table class="table table-hover ">
   <thead>
     <tr>
