@@ -28,13 +28,13 @@ class Member < ApplicationRecord
       response = JSON.parse json_members.body
 
       response['members'].each do |m|
-
-        member = Member.find_by(threema_id: m['id'])
+        if member = Member.find_by(threema_id: m['id'])
           if member.groups.exclude?(group)
             member.groups << group
             member.save
           end
         end
+      end
 
         if group.members.count != response['members'].count
           group.members.each do |member|
