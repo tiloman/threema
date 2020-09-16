@@ -103,7 +103,7 @@ include GroupsHelper
     Member.sync_members_of_group(@group)
     @threema_members = get_members_from_server(@group) if @group.threema_id
     @members = @group.members
-
+    update_members(@group) if @threema_members.count != @members.count 
   end
 
   def create_group_in_threema
