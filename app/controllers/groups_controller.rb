@@ -100,7 +100,7 @@ include GroupsHelper
   end
 
   def show
-    Member.sync_members_of_group(@group)
+    #Member.sync_members_of_group(@group)
     @threema_members = get_members_from_server(@group) if @group.threema_id
     @members = @group.members
     if @threema_members && @members

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
+  
   get 'distribution_lists/index'
   get 'distribution_lists/edit'
   authenticated :user do

@@ -13,8 +13,6 @@ class SyncListMembersJob < ApplicationJob
       end
       response = JSON.parse json_members.body
 
-      puts response
-
       response['recipients'].each do |m|
 
         member = Member.find_by(threema_id: m['id'])
@@ -31,7 +29,7 @@ class SyncListMembersJob < ApplicationJob
             end
           end
         end
-        
+
     end
 
   end

@@ -76,8 +76,6 @@ class User < ApplicationRecord
 
   def new_user_job
     NewUserJob.perform_later(self) unless self.not_signed_up
-    puts "**********NEUER USER******************"
-    puts self.first_name unless self.not_signed_up
   end
 
   def invitation_accepted_notification
@@ -90,8 +88,6 @@ class User < ApplicationRecord
   def role_changed_mail
     if self.saved_change_to_role
       UserMailer.role_changed(self, self.saved_change_to_role).deliver_later unless self.not_signed_up
-      puts "****************************"
-      puts self.saved_change_to_role[1] unless self.not_signed_up
     end
   end
 

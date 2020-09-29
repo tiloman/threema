@@ -43,11 +43,12 @@ module GroupsHelper
   end
 
   def update_members(group)
-    if missing_local = missing_local_members(group)
+    server_members = get_members_from_server(group)
+    if missing_local = missing_local_members(group, server_members)
        remove_members(group, missing_local)
     end
 
-    if missing_remote = missing_remote_members(group)
+    if missing_remote = missing_remote_members(group, server_members)
        add_members(group, missing_remote)
     end
   end
@@ -73,11 +74,11 @@ module GroupsHelper
   end
 
 
-  def missing_local_members(group)
+  def missing_local_members(group, server_members)
     missing = []
     local_members = group.members
 
-    get_members_from_server(group).each do |member|
+    server_members.each do |member|
       if local_members.map { |m| m.threema_id }.exclude?(member['id'])
         missing << member['id']
       end
@@ -85,9 +86,8 @@ module GroupsHelper
     return missing if missing.length > 0
   end
 
-  def missing_remote_members(group)
+  def missing_remote_members(group, server_members)
     missing = []
-    server_members = get_members_from_server(group)
 
     group.members.each do |member|
       if server_members.map { |m| m['id'] }.exclude?(member.threema_id)
