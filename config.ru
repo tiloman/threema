@@ -4,8 +4,7 @@ require_relative 'config/environment'
 
 if Rails.env.production?
   DelayedJobWeb.use Rack::Auth::Basic do |username, password|
-    ActiveSupport::SecurityUtils.variable_size_secure_compare(ENV['DELAYED_USER'], username) &&
-      ActiveSupport::SecurityUtils.variable_size_secure_compare(ENV['DELAYED_PW'], password)
+    username == ENV['DELAYED_USER'] && password == ENV['DELAYED_PW']
   end
 end
 
