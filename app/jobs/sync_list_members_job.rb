@@ -16,10 +16,13 @@ class SyncListMembersJob < ApplicationJob
       response['recipients'].each do |m|
 
         member = Member.find_by(threema_id: m['id'])
-          if member.distribution_lists.exclude?(list)
-            member.distribution_lists << list
-            member.save
-          end
+          if member
+            if member.distribution_lists.exclude?(list)
+              member.distribution_lists << list
+              member.save
+            end
+            #else if member not found -> new member by id...
+          end 
         end
 
         if list.members.count != response['recipients'].count

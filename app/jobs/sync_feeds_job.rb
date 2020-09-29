@@ -25,9 +25,12 @@ class SyncFeedsJob < ApplicationJob
       response['recipients'].each do |m|
 
         member = Member.find_by(threema_id: m['id'])
-          if member.feeds.exclude?(new_feed)
-            member.feeds << new_feed
-            member.save
+          if member
+            if member.feeds.exclude?(new_feed)
+              member.feeds << new_feed
+              member.save
+            end
+          #else member not found -> new member by id...
           end
         end
 
