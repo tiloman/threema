@@ -1,8 +1,8 @@
 <h1>Willkommen <%= @user.name %></h1>
 
 Danke für die Anmeldung bei Threema AJG.
-<% @user.invitation_accepted? == false %>
-Ein Administrator wurde über deine Anmeldung informiert und wird dir demnächst eine Benutzerrolle zuweisen.
-<br><br>Sobald dein Account bestätigt wurde, erhältst du eine E-Mail.
+<% if @user.invitation_accepted? == false %>
+  Ein Administrator wurde über deine Anmeldung informiert und wird Dir demnächst eine Benutzerrolle zuweisen.
+  <br><br>Sobald dein Account bestätigt wurde, erhältst du eine E-Mail.
 <% end %>
 <br>
