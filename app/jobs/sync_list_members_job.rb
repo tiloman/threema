@@ -11,13 +11,13 @@ class SyncListMembersJob < ApplicationJob
         req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
         #req.body = {query: 'salmon'}.to_json
       end
+
       response = JSON.parse json_members.body
 
       if response['recipients'].present?
 
-      response['recipients'].each do |m|
-
-        member = Member.find_by(threema_id: m['id'])
+        response['recipients'].each do |m|
+          member = Member.find_by(threema_id: m['id'])
           if member
             if member.distribution_lists.exclude?(list)
               member.distribution_lists << list
@@ -35,11 +35,13 @@ class SyncListMembersJob < ApplicationJob
           end
         end
 
-    end
-
     else
       AdminMailer.error_log(response, "SyncListMembersJob").deliver_later
     end
+
+
+  end
+
 
   end
 end

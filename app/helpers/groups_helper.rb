@@ -33,8 +33,6 @@ module GroupsHelper
 
     response = JSON.parse response_json.body
     group.update_attribute(:threema_id, response['id'])
-    puts response['id']
-    puts "*******************RESPONES***********"
     return response['id']
   end
 
@@ -45,11 +43,11 @@ module GroupsHelper
   def update_members(group)
     server_members = get_members_from_server(group)
     if missing_local = missing_local_members(group, server_members)
-       remove_members(group, missing_local)
+      remove_members(group, missing_local)
     end
 
     if missing_remote = missing_remote_members(group, server_members)
-       add_members(group, missing_remote)
+      add_members(group, missing_remote)
     end
   end
 
