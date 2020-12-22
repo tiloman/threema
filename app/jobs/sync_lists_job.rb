@@ -10,10 +10,14 @@ class SyncListsJob < ApplicationJob
 
     response = JSON.parse response_json.body
 
-    response['distributionLists'].each do |list|
-      new_list = DistributionList.find_or_create_by(threema_id: list['id'])
-      new_list.update_attribute(:name, list['name']) if list['name'] != new_list.name
-      new_list.update_attribute(:state, list['state']) if list['state'] != new_list.state
+    if response['distributionLists'].present?
+      response['distributionLists'].each do |list|
+        new_list = DistributionList.find_or_create_by(threema_id: list['id'])
+        new_list.update_attribute(:name, list['name']) if list['name'] != new_list.name
+        new_list.update_attribute(:state, list['state']) if list['state'] != new_list.state
+      end
+    else
+      AdminMailer.error_log(response, "SyncListsJob").deliver_later
     end
   end
 end

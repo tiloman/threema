@@ -6,10 +6,10 @@
 
 <div class="feed-message-container">
 <% @messages.each do | message | %>
-<div class="feed-message shadow">
-<div class="feed-date"><%= (message['createdAt']).to_time.strftime("%d.%m.%Y um %H:%M Uhr")  %></div>
-<%= message['body']['de'] %>
-</div>
+  <div class="feed-message shadow">
+  <div class="feed-date"><%= (message['createdAt']).to_time.strftime("%d.%m.%Y um %H:%M Uhr")  %></div>
+  <%= message['body']['de'] if message['body'].present? %>
+  </div>
 <% end %>
 </div>
 

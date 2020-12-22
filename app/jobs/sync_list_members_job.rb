@@ -13,6 +13,8 @@ class SyncListMembersJob < ApplicationJob
       end
       response = JSON.parse json_members.body
 
+      if response['recipients'].present?
+
       response['recipients'].each do |m|
 
         member = Member.find_by(threema_id: m['id'])
@@ -22,7 +24,7 @@ class SyncListMembersJob < ApplicationJob
               member.save
             end
             #else if member not found -> new member by id...
-          end 
+          end
         end
 
         if list.members.count != response['recipients'].count
@@ -33,6 +35,10 @@ class SyncListMembersJob < ApplicationJob
           end
         end
 
+    end
+
+    else
+      AdminMailer.error_log(response, "SyncListMembersJob").deliver_later
     end
 
   end

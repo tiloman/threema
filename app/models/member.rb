@@ -17,43 +17,16 @@ class Member < ApplicationRecord
     self.first_name + " " + self.last_name if self.first_name && self.last_name
   end
 
-  # def self.sync_members_of_group(group)
-  #   if group.threema_id
-  #     json_members = Faraday.get "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/groups/#{group.threema_id}/members?pageSize=0" do |req|
-  #       req.params['limit'] = 100
-  #       req.headers['Content-Type'] = 'application/json'
-  #       req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
-  #       #req.body = {query: 'salmon'}.to_json
-  #     end
-  #     response = JSON.parse json_members.body
-  #
-  #     response['members'].each do |m|
-  #       if member = Member.find_by(threema_id: m['id'])
-  #         if member.groups.exclude?(group)
-  #           member.groups << group
-  #           member.save
-  #         end
-  #       end
-  #     end
-  #
-  #       if group.members.count != response['members'].count
-  #         group.members.each do |member|
-  #           if response['members'].map { |m| m['id'] }.exclude?(member.threema_id)
-  #             group.members.delete(member)
-  #           end
-  #         end
-  #       end
-  #
-  #     end
-  #   end
 
-    def self.get_members_from_threema_work
-      json_members = Faraday.get "https://work.threema.ch/api/v1/users?pageSize=0" do |req|
-        req.params['limit'] = 100
-        req.headers['Content-Type'] = 'application/json'
-        req.headers['X-API-Key'] = ENV['WORK_API_KEY']
-      end
-      response = JSON.parse json_members.body
+  def self.get_members_from_threema_work
+    json_members = Faraday.get "https://work.threema.ch/api/v1/users?pageSize=0" do |req|
+      req.params['limit'] = 100
+      req.headers['Content-Type'] = 'application/json'
+      req.headers['X-API-Key'] = ENV['WORK_API_KEY']
+    end
+    response = JSON.parse json_members.body
+
+    if response['users'].present?
 
       response['users'].each do |m|
         member = Member.find_or_create_by(threema_id: m['id'])
@@ -72,6 +45,8 @@ class Member < ApplicationRecord
       end
 
     end
+
+  end
 
 
 

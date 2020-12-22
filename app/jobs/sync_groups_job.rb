@@ -10,12 +10,16 @@ class SyncGroupsJob < ApplicationJob
 
     response = JSON.parse response_json.body
 
-    response['groups'].each do |group|
-      new_group = Group.find_or_create_by(threema_id: group['id'])
-      new_group.update_attribute(:name, group['name']) if group['name'] != new_group.name
-      new_group.update_attribute(:state, group['state']) if group['state'] != new_group.state
-      new_group.update_attribute(:saveChatHistory, group['saveChatHistory']) if group['saveChatHistory'] != new_group.saveChatHistory
-      ApplicationController.helpers.update_members(new_group)
+    if response['groups'].present?
+      response['groups'].each do |group|
+        new_group = Group.find_or_create_by(threema_id: group['id'])
+        new_group.update_attribute(:name, group['name']) if group['name'] != new_group.name
+        new_group.update_attribute(:state, group['state']) if group['state'] != new_group.state
+        new_group.update_attribute(:saveChatHistory, group['saveChatHistory']) if group['saveChatHistory'] != new_group.saveChatHistory
+        ApplicationController.helpers.update_members(new_group)
+      end
+    else
+      AdminMailer.error_log(response, "SyncGroupsJob").deliver_later
     end
 
   end

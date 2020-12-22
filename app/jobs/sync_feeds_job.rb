@@ -22,28 +22,33 @@ class SyncFeedsJob < ApplicationJob
       response = JSON.parse json_members.body
 
 
-      response['recipients'].each do |m|
+      if response['recipients'].present?
 
-        member = Member.find_by(threema_id: m['id'])
-          if member
-            if member.feeds.exclude?(new_feed)
-              member.feeds << new_feed
-              member.save
-            end
-          #else member not found -> new member by id...
-          end
-        end
+        response['recipients'].each do |m|
 
-        if new_feed.members.count != response['recipients'].count
-          new_feed.members.each do |member|
-            if response['recipients'].map { |m| m['id'] }.exclude?(member.threema_id)
-              new_feed.members.delete(member)
+          member = Member.find_by(threema_id: m['id'])
+            if member
+              if member.feeds.exclude?(new_feed)
+                member.feeds << new_feed
+                member.save
+              end
+            #else member not found -> new member by id...
             end
           end
+
+          if new_feed.members.count != response['recipients'].count
+            new_feed.members.each do |member|
+              if response['recipients'].map { |m| m['id'] }.exclude?(member.threema_id)
+                new_feed.members.delete(member)
+              end
+            end
+          end
+
         end
 
-
-    end
+      else
+        AdminMailer.error_log(response, "SyncFeedsJobs").deliver_later
+      end
 
   end
 end
