@@ -9,7 +9,6 @@ class SyncListMembersJob < ApplicationJob
         req.params['limit'] = 100
         req.headers['Content-Type'] = 'application/json'
         req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
-        #req.body = {query: 'salmon'}.to_json
       end
 
       response = JSON.parse json_members.body

@@ -49,7 +49,7 @@ include GroupsHelper
       respond_to do |format|
         if @group.update(group_params)
           @group.reload
-          update_members(@group) if @group.threema_id
+          push_changes_to_threema(@group) if @group.threema_id
           format.html { redirect_to @group, notice: "Die Gruppe wurde aktualisiert." }
           format.json { render :show, status: :ok, location: @group }
         else
@@ -104,14 +104,13 @@ include GroupsHelper
     @threema_members = get_members_from_server(@group) if @group.threema_id
     @members = @group.members
     if @threema_members && @members
-      update_members(@group) if @threema_members.count != @members.count
+      pull_changes_from_threema(@group) if @threema_members.count != @members.count
     end
   end
 
   def create_group_in_threema
     @group = Group.find(params[:group_id])
     group_response = create_group(@group, @group.name, @group.members.map { |m| m.threema_id }.to_a, @group.saveChatHistory) unless @group.threema_id
-    #redirect_to @group, notice: create_group
     respond_to do |format|
       format.html { redirect_to @group, notice: "Gruppe erstellt (#{group_response})" }
       format.json { head :no_content }

@@ -16,7 +16,7 @@ class SyncGroupsJob < ApplicationJob
         new_group.update_attribute(:name, group['name']) if group['name'] != new_group.name
         new_group.update_attribute(:state, group['state']) if group['state'] != new_group.state
         new_group.update_attribute(:saveChatHistory, group['saveChatHistory']) if group['saveChatHistory'] != new_group.saveChatHistory
-        ApplicationController.helpers.update_members(new_group)
+        ApplicationController.helpers.pull_changes_from_threema(new_group)
       end
     else
       AdminMailer.error_log(response, "SyncGroupsJob").deliver_later

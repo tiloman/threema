@@ -40,18 +40,30 @@ module GroupsHelper
     Member.where(id: member_ids).map { |m| m['threema_id'] }
   end
 
-  def update_members(group)
-    server_members = get_members_from_server(group)
-    if missing_local = missing_local_members(group, server_members)
-      remove_members(group, missing_local)
+  def pull_changes_from_threema(group)
+    server_members = get_members_from_server(group) #got list of members {[peter, nachname], [paul, mustermann], ...}
+    if missing_remote = missing_remote_members(group, server_members)
+      remove_members_from_local_group(group, missing_remote)
     end
 
-    if missing_remote = missing_remote_members(group, server_members)
-      add_members(group, missing_remote)
+    if missing_local = missing_local_members(group, server_members)
+      add_members_to_local_group(group, missing_local)
     end
   end
 
-  def remove_members(group, members)
+
+  def push_changes_to_threema(group)
+    server_members = get_members_from_server(group) #got list of members {[peter, nachname], [paul, mustermann], ...}
+    if missing_remote = missing_remote_members(group, server_members)
+      add_members_to_threema(group, missing_remote)
+    end
+
+    if missing_local = missing_local_members(group, server_members)
+      remove_members_from_threema(group, missing_local)
+    end
+  end
+
+  def remove_members_from_threema(group, members)
     request = Faraday.delete "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/groups/#{group.threema_id}/members" do |req|
       req.params['limit'] = 100
       req.headers['Content-Type'] = 'application/json'
@@ -61,7 +73,7 @@ module GroupsHelper
     puts request.status
   end
 
-  def add_members(group, members)
+  def add_members_to_threema(group, members)
     request = Faraday.post "https://broadcast.threema.ch/api/v1/identities/#{ENV['BROADCAST_ID']}/groups/#{group.threema_id}/members" do |req|
       req.params['limit'] = 100
       req.headers['Content-Type'] = 'application/json'
@@ -69,6 +81,18 @@ module GroupsHelper
       req.body = members.to_json
     end
     request.body
+  end
+
+  def add_members_to_local_group(group, members)
+    members.each do |member|
+      group.members << member
+    end
+  end
+
+  def remove_members_from_local_group(group, members)
+    members.each do |member|
+      group.members.delete(member)
+    end
   end
 
 
@@ -100,7 +124,6 @@ module GroupsHelper
       req.params['limit'] = 100
       req.headers['Content-Type'] = 'application/json'
       req.headers['X-API-Key'] = ENV['BROADCAST_API_KEY']
-      #req.body = {query: 'salmon'}.to_json
     end
     response = JSON.parse json_members.body
 
