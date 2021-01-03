@@ -3,7 +3,7 @@ class ApplicationJob < ActiveJob::Base
 
   def perform(*args)
     #schedule new jobs every x hours due to lack of cronjobs in dokku
-    ApplicationJob.set(wait: 3.hour).perform_later
+    ApplicationJob.set(wait: 6.hour).perform_later
 
     #clean up before scheduling
     Delayed::Job.where("handler ilike (?)", "%SyncFeedsJob%").destroy_all
