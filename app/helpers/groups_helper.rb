@@ -85,13 +85,17 @@ module GroupsHelper
 
   def add_members_to_local_group(group, members)
     members.each do |member|
-      group.members << member
+      if new_member = Member.find_by(threema_id: member)
+        group.members << new_member
+      end
     end
   end
 
   def remove_members_from_local_group(group, members)
     members.each do |member|
-      group.members.delete(member)
+      if old_member = Member.find_by(threema_id: member)
+        group.members.delete(Member.find_by(threema_id: member))
+      end
     end
   end
 
