@@ -24,8 +24,7 @@ Gegründet: <%= User.find(@group.created_by).name %><br>
     Lokal: <%= @group.members.count %><br><br>
     Lade die Seite neu um zu synchronisieren.
     <% link_to "Gruppe synchronisieren", group_path(:id => @group.id, :sync => "sync_now"), class:"btn btn-primary btn-sm" %><br>
-  <% else %>
-  <h5>Gruppe synchronisiert</h5>
+  
   <% end %>
   <% else %>
   <h5>Gruppe wurde noch nicht veröffentlicht.</h5><br>
