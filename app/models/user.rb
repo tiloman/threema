@@ -63,7 +63,13 @@ class User < ApplicationRecord
   def validate_threema_account_data
     if threema_id
       if member = Member.find_by(threema_id: threema_id)
-        if first_name.downcase != member.first_name.downcase || last_name.downcase != member.last_name.downcase
+        user_first_name = I18n.transliterate(first_name.downcase).gsub(/\s+/, '')
+        member_first_name = I18n.transliterate(member.first_name.downcase).gsub(/\s+/, '')
+
+        user_last_name = I18n.transliterate(last_name.downcase).gsub(/\s+/, '')
+        member_last_name = I18n.transliterate(member.last_name.downcase).gsub(/\s+/, '')
+
+        if user_first_name != member_first_name || user_last_name != member_last_name
           errors[:base] << "Die bei Threema hinterlegten Daten stimmen nicht mit den hier eingegebenen Daten überein."
           throw :abort
         end
