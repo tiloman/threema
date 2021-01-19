@@ -63,18 +63,31 @@ class User < ApplicationRecord
   def validate_threema_account_data
     if threema_id
       if member = Member.find_by(threema_id: threema_id)
+        username = member.get_username_from_threema_work.downcase
+        username_array = username.strip.split /\s+/ #[lohmann, timo]
+        username_first = username_array.second.gsub(/\s+/, '') #timo
+        username_last = username_array.first.gsub(/\s+/, '') #lohmann
+
         user_first_name = I18n.transliterate(first_name.downcase).gsub(/\s+/, '')
-        member_first_name = I18n.transliterate(member.first_name.downcase).gsub(/\s+/, '')
-
         user_last_name = I18n.transliterate(last_name.downcase).gsub(/\s+/, '')
-        member_last_name = I18n.transliterate(member.last_name.downcase).gsub(/\s+/, '')
 
-        if user_first_name != member_first_name || user_last_name != member_last_name
+        first_name_valid = user_first_name == username_first || user_first_name == username_last
+        last_name_valid = user_last_name == username_first || user_last_name == username_last
+        first_name_and_last_name_differ = user_first_name != user_last_name
+
+        puts first_name_valid
+        puts last_name_valid
+        puts first_name_and_last_name_differ
+
+        if first_name_valid == false || last_name_valid == false || first_name_and_last_name_differ == false
           errors[:base] << "Die bei Threema hinterlegten Daten stimmen nicht mit den hier eingegebenen Daten überein."
+          errors[:base] << "Bitte gleiche die eingegebenen Daten mit den in der App hinterlegten Daten ab. Zu finden Sie diese in den Einstellungen unter dem Punkt: Lizenz-Benutzername."
+          errors[:base] << "Dieser setzt sich aus Nachname + Vorname zusammen. Die entsprechende Eingabe ist hier erforderlich."
+          errors[:base] << "Aktuelle Eingabe: #{self.last_name} #{self.first_name}"
           throw :abort
         end
       else
-        errors[:base] << "Die Threema ID kann im System nicht gefunden werden."
+        errors[:base] << "Die Threema ID kann im System nicht gefunden werden. Wenn der Account neu erstellt wurde, kann es bis zu 6h dauern bis er mit dem System synchronisiert wurde. Versuche es später noch einmal. Tritt das Problem weiterhin auf, kontaktiere bitte einen Administrator."
         throw :abort
       end
     end
