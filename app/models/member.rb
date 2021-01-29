@@ -58,7 +58,7 @@ class Member < ApplicationRecord
         member.update_column(:last_name, m['lastName']) if m['lastName'] != member.last_name
         member.update_column(:category, m['category']) if m['category'] != member.category
         member.update_column(:nickname, m['nickname']) if m['nickname'] != member.nickname
-        member.update_column(:username, m['username']) if m['username'] != member.username
+        #member.update_column(:username, m['username']) if m['username'] != member.username
 
       end
 
