@@ -19,7 +19,7 @@ class SyncGroupsJob < ApplicationJob
         ApplicationController.helpers.pull_changes_from_threema(new_group)
       end
     else
-      AdminMailer.error_log(response, "SyncGroupsJob").deliver_later
+    #  AdminMailer.error_log(response, "SyncGroupsJob").deliver_later
     end
 
   end

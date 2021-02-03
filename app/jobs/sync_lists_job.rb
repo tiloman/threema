@@ -17,7 +17,7 @@ class SyncListsJob < ApplicationJob
         new_list.update_attribute(:state, list['state']) if list['state'] != new_list.state
       end
     else
-      AdminMailer.error_log(response, "SyncListsJob").deliver_later
+      #AdminMailer.error_log(response, "SyncListsJob").deliver_later
     end
   end
 end
