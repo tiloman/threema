@@ -68,16 +68,12 @@ class User < ApplicationRecord
         username_first = username_array.second.gsub(/\s+/, '') #timo
         username_last = username_array.first.gsub(/\s+/, '') #lohmann
 
-        user_first_name = I18n.transliterate(first_name.downcase).gsub(/\s+/, '')
-        user_last_name = I18n.transliterate(last_name.downcase).gsub(/\s+/, '')
+        user_first_name = first_name.downcase.gsub(/\s+/, '')
+        user_last_name = last_name.downcase.gsub(/\s+/, '')
 
         first_name_valid = user_first_name == username_first || user_first_name == username_last
         last_name_valid = user_last_name == username_first || user_last_name == username_last
         first_name_and_last_name_differ = user_first_name != user_last_name
-
-        puts first_name_valid
-        puts last_name_valid
-        puts first_name_and_last_name_differ
 
         if first_name_valid == false || last_name_valid == false || first_name_and_last_name_differ == false
           errors[:base] << "Die bei Threema hinterlegten Daten stimmen nicht mit den hier eingegebenen Daten überein."
