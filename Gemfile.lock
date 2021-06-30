@@ -196,7 +196,8 @@ GEM
       actionmailer (>= 3)
       premailer (~> 1.7, >= 1.7.9)
     public_suffix (4.0.5)
-    puma (3.12.6)
+    puma (4.3.8)
+      nio4r (~> 2.0)
     rack (2.2.2)
     rack-protection (2.1.0)
       rack
@@ -331,7 +332,7 @@ DEPENDENCIES
   mimemagic!
   paperclip (~> 6.0.0)
   pg (>= 0.18, < 2.0)
-  puma (~> 3.11)
+  puma (~> 4.3)
   rails (~> 5.2.4, >= 5.2.4.3)
   sass-rails (~> 5.0)
   select2-rails
