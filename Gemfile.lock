@@ -93,10 +93,6 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
-    bootstrap-email (1.0.1)
-      nokogiri (~> 1.6)
-      premailer (~> 1.7)
-      sassc (~> 2.0)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.35.3)
@@ -220,6 +216,9 @@ GEM
       addressable
       css_parser (>= 1.6.0)
       htmlentities (>= 4.0.0)
+    premailer-rails (1.11.1)
+      actionmailer (>= 3)
+      premailer (~> 1.7, >= 1.7.9)
     public_suffix (4.0.6)
     puma (3.12.6)
     racc (1.5.2)
@@ -342,7 +341,6 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)
-  bootstrap-email
   byebug
   capybara (>= 2.15)
   chromedriver-helper
@@ -360,6 +358,7 @@ DEPENDENCIES
   mimemagic!
   paperclip (~> 6.0.0)
   pg (>= 0.18, < 2.0)
+  premailer-rails
   puma (~> 3.11)
   rails (~> 6.0.0)
   sass-rails (~> 5.0)

@@ -6,9 +6,8 @@ ruby '3.0.2'
 gem 'rails', '~> 6.0.0'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
-#gem 'bootstrap' # 5.0 is recent v..
-gem 'bootstrap', '~> 4.3.1'
-gem 'bootstrap-email'#, '~> 0.3.1' #rails update!
+gem 'bootstrap', '~> 4.3.1' # old
+gem 'premailer-rails'
 
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
