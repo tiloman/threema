@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '3.0.2'
 
-gem 'rails', '~> 5.2.4', '>= 5.2.4.3'
+gem 'rails', '~> 6.0.0'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
-gem 'bootstrap'
-gem 'bootstrap-email', '~> 0.3.1'
+#gem 'bootstrap' # 5.0 is recent v..
+gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap-email'#, '~> 0.3.1' #rails update!
 
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
@@ -22,7 +23,7 @@ gem 'devise_invitable', '~> 2.0.0'
 gem 'faraday'
 gem 'delayed_job_active_record'
 gem 'select2-rails'
-gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate'#, '~> 3.1.0'
 gem 'will_paginate-bootstrap'
 gem 'whenever', require: false
 gem "paperclip", "~> 6.0.0"

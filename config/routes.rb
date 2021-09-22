@@ -1,16 +1,9 @@
 Rails.application.routes.draw do
 
   match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
-  
+
   get 'distribution_lists/index'
   get 'distribution_lists/edit'
-  authenticated :user do
-    root to: "home#index"
-  end
-
-  devise_scope :user do
-    root to: "users/sessions#new"
-  end
 
   get 'groups/new'
   get 'groups/manage'
@@ -24,6 +17,17 @@ Rails.application.routes.draw do
     end
   end#, only: [:index, :show]
   match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
+
+
+  devise_scope :user do
+    authenticated :user do
+      root 'home#index'
+    end
+
+    unauthenticated do
+      root to: "users/sessions#new", as: :unauthenticated_root
+    end
+  end
 
 
   resources :teams
