@@ -32,10 +32,5 @@ class AdminMailer < ApplicationMailer
     end
   end
 
-  def error_log(error_message, job )
-    @error_message = error_message
-    @job = job
-    mail(to: "lohmanntimo@gmail.com", subject: 'Fehler bei Threema4teachers')
-  end
 
 end

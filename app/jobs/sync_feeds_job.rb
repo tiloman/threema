@@ -43,8 +43,6 @@ class SyncFeedsJob < ApplicationJob
           end
         end
 
-      else
-        #AdminMailer.error_log(response, "SyncFeedsJobs").deliver_later
       end
 
 

@@ -34,8 +34,6 @@ class SyncListMembersJob < ApplicationJob
           end
         end
 
-    else
-    #  AdminMailer.error_log(response, "SyncListMembersJob").deliver_later
     end
 
 
