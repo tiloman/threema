@@ -147,8 +147,8 @@ module GroupsHelper
 
   def show_image(group)
     if group.avatar.present?
-      image_tag group.avatar.url(:medium) , class:"group-image"
-    elsif group.image
+      image_tag group.avatar.url(:medium), class:"group-image"
+    elsif group.image.present?
       data = "data:image/jpeg;base64,#{group.image}"
       image_tag data, class:"group-image"
     else
@@ -159,7 +159,7 @@ module GroupsHelper
   def show_big_image(group)
     if group.avatar.present?
       image_tag group.avatar.url(:medium) , class:"group-image-big"
-    elsif group.image
+    elsif group.image.present?
       data = "data:image/jpeg;base64,#{group.image}"
       image_tag data, class:"group-image-big"
     else

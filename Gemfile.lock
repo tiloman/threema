@@ -204,7 +204,7 @@ GEM
     nokogiri (1.12.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    paperclip (6.0.0)
+    paperclip (6.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       mime-types
@@ -356,7 +356,7 @@ DEPENDENCIES
   jquery-rails
   listen (>= 3.0.5, < 3.2)
   mimemagic!
-  paperclip (~> 6.0.0)
+  paperclip (~> 6.1.0)
   pg (>= 0.18, < 2.0)
   premailer-rails
   puma (~> 3.11)

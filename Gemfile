@@ -25,7 +25,7 @@ gem 'select2-rails'
 gem 'will_paginate'#, '~> 3.1.0'
 gem 'will_paginate-bootstrap'
 gem 'whenever', require: false
-gem "paperclip", "~> 6.0.0"
+gem "paperclip", "~> 6.1.0"
 gem 'aws-sdk-s3' #for storage
 gem 'google-analytics-rails', '1.1.1'
 gem 'cookies_eu'
